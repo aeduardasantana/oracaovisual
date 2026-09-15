@@ -15,6 +15,10 @@ Aplicação web católica, mobile-first, para apoiar o hábito da oração diár
 - toda oração termina com “Em nome de Jesus. Amém.”;
 - o Pai-Nosso (Mt 6,9-13) é apresentado como o modelo ensinado por Jesus;
 - a oração guiada termina com propósito concreto e pedido de perseverança;
+- todas as escolhas são opcionais; somente a presença da Santíssima Trindade é permanente;
+- o pedido de intercessão de Maria, José ou outro santo é opcional;
+- virtudes, dons, frutos, Mandamentos, preceitos e obras de misericórdia são organizados em grupos;
+- a oração final utiliza emojis como apoio à leitura visual;
 - o histórico permanece somente no navegador da pessoa.
 
 ## Uso

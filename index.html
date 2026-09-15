@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173b63">
+  <meta name="description" content="Uma oração por imagens, com palavras curtas e apoio do VLibras.">
+  <title>Oração Visual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Oração Visual - início"><span class="brand-mark">✦</span><span>Oração Visual</span></a>
+    <button class="habit" id="habitButton" type="button" aria-label="Ver hábito de oração"><span>Hoje</span><strong id="habitCount">○</strong></button>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <img src="assets/oracao-visual-hero.webp" alt="Jesus ao centro, Deus Pai, o Espírito Santo, Santa Maria e São José em uma paisagem iluminada">
+      <div class="hero-shade"></div>
+      <div class="hero-content">
+        <p class="eyebrow">UM ENCONTRO DIÁRIO</p>
+        <h1>Reze com<br>o que você vê.</h1>
+        <p>Escolha imagens. Reconheça o que sente. Faça sua oração.</p>
+        <button class="primary" id="startButton" type="button">COMEÇAR MINHA ORAÇÃO <span>→</span></button>
+      </div>
+    </section>
+
+    <section class="how" aria-labelledby="como-funciona">
+      <p class="eyebrow blue">ORAÇÃO EM QUATRO MOVIMENTOS</p>
+      <h2 id="como-funciona">Você escolhe. As imagens ajudam a expressar.</h2>
+      <div class="steps-preview">
+        <span><b>1</b> Encontro</span><span><b>2</b> Perdão</span><span><b>3</b> Pedido</span><span><b>4</b> Gratidão</span>
+      </div>
+    </section>
+
+    <section class="prayer" id="orar" hidden>
+      <div class="progress" aria-label="Progresso da oração"><span id="progressBar"></span></div>
+      <div id="stepContent" aria-live="polite"></div>
+      <div class="navigation">
+        <button class="secondary" id="backButton" type="button">VOLTAR</button>
+        <button class="primary" id="nextButton" type="button">CONTINUAR <span>→</span></button>
+      </div>
+    </section>
+
+    <section class="closing" id="closing" hidden aria-live="polite">
+      <div class="closing-symbol">✦</div>
+      <p class="eyebrow gold">SUA ORAÇÃO DE HOJE</p>
+      <h2>Senhor, eu estou aqui.</h2>
+      <div id="prayerSummary" class="summary"></div>
+      <p class="fixed-ending">Em nome de Jesus.<br><strong>Amém.</strong></p>
+      <button class="primary" id="finishButton" type="button">CONCLUIR ORAÇÃO</button>
+    </section>
+  </main>
+
+  <footer>
+    <strong>Oração Visual</strong>
+    <p>Recurso de apoio à oração pessoal. A palavra escrita acompanha cada imagem para acessibilidade em Libras.</p>
+    <a href="https://github.com/aeduardasantana/oracaovisual">Compass Rose Systems</a>
+  </footer>
+
+  <div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+  <script src="app.js"></script>
+</body>
+</html>

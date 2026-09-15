@@ -25,4 +25,4 @@ Abra `index.html` ou publique o repositório pelo GitHub Pages. Não há banco d
 
 ## Imagens
 
-A ilustração principal foi criada originalmente para este projeto. As opções da oração utilizam fotografias do Pexels como primeira curadoria visual. Novas imagens podem ser cadastradas em `app.js`; registre sempre título, texto alternativo, origem, autor e licença.
+A ilustração principal foi criada originalmente para este projeto. As demais imagens devem ser inseridas somente após validação visual individual de correspondência com cada conceito. Novas imagens podem ser cadastradas em `app.js`; registre sempre título, texto alternativo, origem, autor e licença.

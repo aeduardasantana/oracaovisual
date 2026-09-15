@@ -6,6 +6,7 @@ Aplicação web católica, mobile-first, para apoiar o hábito da oração diár
 
 - a imagem é a linguagem principal;
 - cada imagem possui palavra ou frase curta para leitura pelo VLibras;
+- a imagem ocupa a maior parte de cada opção; o texto fica em bloco separado e secundário;
 - Maria e São José aparecem como intercessores junto a Jesus;
 - a adoração (latria) dirige-se somente à Santíssima Trindade;
 - Maria recebe veneração especial (hiperdulia), São José recebe protodulia e os demais santos, dulia;
@@ -24,4 +25,4 @@ Abra `index.html` ou publique o repositório pelo GitHub Pages. Não há banco d
 
 ## Imagens
 
-A ilustração principal foi criada originalmente para este projeto. Novas imagens podem ser cadastradas em `app.js`; registre sempre título, texto alternativo, origem, autor e licença.
+A ilustração principal foi criada originalmente para este projeto. As opções da oração utilizam fotografias do Pexels como primeira curadoria visual. Novas imagens podem ser cadastradas em `app.js`; registre sempre título, texto alternativo, origem, autor e licença.

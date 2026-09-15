@@ -7,6 +7,10 @@ Aplicação web católica, mobile-first, para apoiar o hábito da oração diár
 - a imagem é a linguagem principal;
 - cada imagem possui palavra ou frase curta para leitura pelo VLibras;
 - Maria e São José aparecem como intercessores junto a Jesus;
+- a adoração (latria) dirige-se somente à Santíssima Trindade;
+- Maria recebe veneração especial (hiperdulia), São José recebe protodulia e os demais santos, dulia;
+- a perspectiva mariana segue a devoção que conduz a Jesus, apresentada por São Luís Maria Grignion de Montfort;
+- São José é apresentado como pai no coração, protetor e intercessor, em consonância com `Patris corde`;
 - toda oração termina com “Em nome de Jesus. Amém.”;
 - o Pai-Nosso (Mt 6,9-13) é apresentado como o modelo ensinado por Jesus;
 - a oração guiada termina com propósito concreto e pedido de perseverança;

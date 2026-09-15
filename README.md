@@ -21,6 +21,7 @@ Aplicação web católica, mobile-first, para apoiar o hábito da oração diár
 - os grupos permanecem fechados inicialmente e são abertos por botões grandes;
 - “Situações do dia” contém exemplos pastorais, enquanto os sete pecados capitais aparecem em grupo catequético próprio (CIC 1866);
 - a oração final utiliza emojis como apoio à leitura visual;
+- a Santíssima Trindade é apresentada em um único painel para preservar a composição original, seguida dos papéis do Pai, de Jesus e do Espírito Santo;
 - o histórico permanece somente no navegador da pessoa.
 
 ## Uso

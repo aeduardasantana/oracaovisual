@@ -18,6 +18,8 @@ Aplicação web católica, mobile-first, para apoiar o hábito da oração diár
 - todas as escolhas são opcionais; somente a presença da Santíssima Trindade é permanente;
 - o pedido de intercessão de Maria, José ou outro santo é opcional;
 - virtudes, dons, frutos, Mandamentos, preceitos e obras de misericórdia são organizados em grupos;
+- os grupos permanecem fechados inicialmente e são abertos por botões grandes;
+- “Situações do dia” contém exemplos pastorais, enquanto os sete pecados capitais aparecem em grupo catequético próprio (CIC 1866);
 - a oração final utiliza emojis como apoio à leitura visual;
 - o histórico permanece somente no navegador da pessoa.
 

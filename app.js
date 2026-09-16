@@ -102,6 +102,18 @@ function renderConfessionGuidance(){
 startButton.addEventListener('click',()=>{$('.hero').hidden=true;$('.how').hidden=true;$('.our-father').hidden=true;prayer.hidden=false;render();window.scrollTo({top:0,behavior:'smooth'})});
 back.addEventListener('click',()=>{if(current>0){current--;render();window.scrollTo({top:0,behavior:'smooth'})}});
 next.addEventListener('click',()=>{if(current<steps.length-1){current++;render();window.scrollTo({top:0,behavior:'smooth'})}else buildPrayer()});
-$('#finishButton').addEventListener('click',()=>{localStorage.setItem('oracaoVisualLast',new Date().toISOString().slice(0,10));updateHabit();location.reload()});
+$('#finishButton').addEventListener('click',()=>{
+ localStorage.setItem('oracaoVisualLast',new Date().toISOString().slice(0,10));
+ updateHabit();
+ $('#closing').hidden=true;
+ $('#prayerComplete').hidden=false;
+ window.scrollTo({top:$('#prayerComplete').offsetTop,behavior:'smooth'});
+});
+$('#homeButton').addEventListener('click',()=>{
+ current=0;saintName='';choices=steps.map(()=>[]);choices[0]=['pai','jesus','espirito'];activeGroups=steps.map(()=>-1);
+ $('#prayerComplete').hidden=true;
+ $('.hero').hidden=false;$('.how').hidden=false;$('.our-father').hidden=false;
+ window.scrollTo({top:0,behavior:'smooth'});
+});
 function updateHabit(){const today=new Date().toISOString().slice(0,10);$('#habitCount').textContent=localStorage.getItem('oracaoVisualLast')===today?'✓':'○'}
 $('#habitButton').addEventListener('click',()=>{const toast=document.createElement('div');toast.className='toast';toast.textContent=$('#habitCount').textContent==='✓'?'Sua oração de hoje foi concluída.':'Sua oração de hoje ainda espera por você.';document.body.append(toast);setTimeout(()=>toast.remove(),2800)});updateHabit();

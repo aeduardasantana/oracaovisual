@@ -48,21 +48,24 @@ const steps=[
  {purpose:'BÊNÇÃO, ADORAÇÃO E LOUVOR',title:'Quem Deus é para você hoje?',subtitle:'Reconheça a grandeza de Deus antes de apresentar qualquer pedido.',items:adoration,multi:true},
  {purpose:'PEDIR PERDÃO',title:'Por que você quer pedir perdão?',subtitle:'Abra uma categoria se desejar. Você também pode seguir sem marcar nada.',items:sins,multi:true,groups:[{label:'SITUAÇÕES DO DIA',items:sins},{label:'7 PECADOS CAPITAIS',items:capitalSins},{label:'10 MANDAMENTOS',items:commandments},{label:'PRECEITOS DA IGREJA',items:churchPrecepts}]},
  {purpose:'AÇÃO DE GRAÇAS',title:'Pelo que você quer agradecer?',subtitle:'Olhe para sua vida e reconheça os dons recebidos.',items:thanks,multi:true},
- {purpose:'PEDIR UMA GRAÇA',title:'O que você deseja pedir?',subtitle:'Escolha entre virtudes, dons e frutos do Espírito Santo. Tudo é opcional.',items:virtues,multi:true,groups:[{label:'VIRTUDES',items:virtues},{label:'7 DONS',items:gifts},{label:'12 FRUTOS',items:fruits}]},
+ {purpose:'PEDIR UMA GRAÇA',title:'O que você deseja pedir?',subtitle:'Escolha entre virtudes, dons e frutos do Espírito Santo. Você também pode escrever outro pedido. Tudo é opcional.',items:virtues,multi:true,requestField:true,groups:[{label:'VIRTUDES',items:virtues},{label:'7 DONS',items:gifts},{label:'12 FRUTOS',items:fruits}]},
  {purpose:'INTERCESSÃO',title:'Por quem você quer rezar?',subtitle:'Apresente a Deus as necessidades de outras pessoas.',items:intercessions,multi:true},
- {purpose:'VENERAÇÃO E INTERCESSÃO DOS SANTOS',title:'A quem você pede intercessão?',subtitle:'Aos santos prestamos veneração, nunca adoração. Eles intercedem por nós junto a Deus.',items:devotions,multi:true,saintField:true},
+ {purpose:'JESUS E A INTERCESSÃO DOS SANTOS',title:'A quem você pede intercessão?',subtitle:'Jesus é o único mediador entre nós e Deus. Aos santos prestamos veneração, nunca adoração; eles intercedem por nós junto a Jesus.',items:devotions,multi:true,saintField:true,jesusMediator:true},
  {purpose:'GESTO CONCRETO',title:'Você quer escolher uma ação?',subtitle:'Escolha um propósito ou uma obra de misericórdia. Esta etapa também é opcional.',items:resolutions,multi:false,groups:[{label:'PROPÓSITOS',items:resolutions},{label:'OBRAS CORPORAIS',items:corporalWorks},{label:'OBRAS ESPIRITUAIS',items:spiritualWorks}]}
 ];
-let current=0,saintName='',choices=steps.map(()=>[]),activeGroups=steps.map(()=>-1);choices[0]=['pai','jesus','espirito'];
+let current=0,saintName='',customRequest='',choices=steps.map(()=>[]),activeGroups=steps.map(()=>-1);choices[0]=['pai','jesus','espirito'];
 const $=selector=>document.querySelector(selector),startButton=$('#startButton'),prayer=$('#orar'),content=$('#stepContent'),next=$('#nextButton'),back=$('#backButton');
+const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 function render(){
  const step=steps[current],groupOpen=activeGroups[current]>=0,visibleItems=step.groups&&groupOpen?step.groups[activeGroups[current]].items:step.groups?[]:step.items;$('#progressBar').style.width=`${((current+1)/steps.length)*100}%`;
  const groupTabs=step.groups?`<div class="group-tabs">${step.groups.map((group,index)=>{const count=group.items.filter(item=>choices[current].includes(item.id)).length;return `<button type="button" class="${activeGroups[current]===index?'active':''}" data-group="${index}"><span>${group.label}</span>${count?`<b>${count} escolhido${count>1?'s':''}</b>`:'<b>ABRIR</b>'}<i>${activeGroups[current]===index?'−':'+'}</i></button>`}).join('')}</div>`:'';
  const groupHint=step.groups&&!groupOpen?'<p class="group-hint">Escolha um dos botões acima para ver as opções.</p>':'';
  const trinityPanel=step.trinityPanel?`<div class="trinity-panel"><img src="assets/trindade/santissima-trindade.svg?v=20260916-3" alt="Santíssima Trindade: Deus Pai, Jesus Cristo e Espírito Santo"><div>${trinity.map(item=>`<article><strong>${item.label}</strong><span>${item.meaning}</span></article>`).join('')}</div></div>`:'';
- content.innerHTML=`<div class="step-head"><span class="step-number">${step.purpose} · PASSO ${current+1} DE ${steps.length}</span><h2>${step.title}</h2><p>${step.subtitle}</p></div>${trinityPanel}${groupTabs}${groupHint}${step.trinityPanel?'':`<div class="cards">${visibleItems.map(item=>`<button type="button" class="visual-card ${step.type||''} ${step.fixed?'fixed':''} ${choices[current].includes(item.id)?'selected':''}" data-id="${item.id}" style="--pos:${item.pos||'50% 50%'}" aria-pressed="${choices[current].includes(item.id)}"><span class="check">✓</span><span class="art" role="img" aria-label="${item.label}">${item.icon||''}</span><span class="label">${item.label}</span><span class="meaning">${item.meaning}</span><span class="image-credit">Símbolo visual</span></button>`).join('')}</div>`}${step.saintField?`<div class="saint-field"><label for="saintName">OUTRO SANTO DE DEVOÇÃO</label><input id="saintName" maxlength="60" value="${saintName}" placeholder="Exemplo: Santa Teresinha do Menino Jesus"><small>Opcional. O nome será usado apenas nesta oração.</small></div>`:''}`;
+ const mediatorPanel=step.jesusMediator?`<div class="mediator-card" aria-label="Jesus, único mediador, já presente nesta oração"><span class="mediator-image" role="img" aria-label="Jesus Cristo"></span><span class="mediator-check">✓ PRÉ-SELECIONADO</span><strong>JESUS</strong><p>Único mediador entre nós e Deus.<br><small>1 Timóteo 2,5</small></p></div>`:'';
+ content.innerHTML=`<div class="step-head"><span class="step-number">${step.purpose} · PASSO ${current+1} DE ${steps.length}</span><h2>${step.title}</h2><p>${step.subtitle}</p></div>${trinityPanel}${mediatorPanel}${groupTabs}${groupHint}${step.trinityPanel?'':`<div class="cards">${visibleItems.map(item=>`<button type="button" class="visual-card ${step.type||''} ${step.fixed?'fixed':''} ${choices[current].includes(item.id)?'selected':''}" data-id="${item.id}" style="--pos:${item.pos||'50% 50%'}" aria-pressed="${choices[current].includes(item.id)}"><span class="check">✓</span><span class="art" role="img" aria-label="${item.label}">${item.icon||''}</span><span class="label">${item.label}</span><span class="meaning">${item.meaning}</span><span class="image-credit">Símbolo visual</span></button>`).join('')}</div>`}${step.requestField?`<div class="open-request"><label for="customRequest">OUTRO PEDIDO</label><textarea id="customRequest" maxlength="500" placeholder="Escreva aqui outro pedido, se desejar.">${escapeHtml(customRequest)}</textarea><small>Opcional. Este pedido será incluído na oração final.</small></div>`:''}${step.saintField?`<div class="saint-field"><label for="saintName">OUTRO SANTO DE DEVOÇÃO</label><input id="saintName" maxlength="60" value="${escapeHtml(saintName)}" placeholder="Exemplo: Santa Teresinha do Menino Jesus"><small>Opcional. O nome será usado apenas nesta oração.</small></div>`:''}`;
  content.querySelectorAll('[data-group]').forEach(button=>button.addEventListener('click',()=>{const selected=Number(button.dataset.group);activeGroups[current]=activeGroups[current]===selected?-1:selected;render()}));
  if(!step.fixed)content.querySelectorAll('.visual-card').forEach(card=>card.addEventListener('click',()=>select(card.dataset.id)));
+ if(step.requestField){const field=$('#customRequest');field.addEventListener('input',event=>{customRequest=event.target.value.trim()})}
  if(step.saintField){const field=$('#saintName');field.addEventListener('input',event=>{saintName=event.target.value.trim();if(saintName&&!choices[current].includes('outro'))choices[current]=[...choices[current],'outro']})}
  back.style.visibility=current===0?'hidden':'visible';next.textContent=current===steps.length-1?'MONTAR MINHA ORAÇÃO →':choices[current].length?'CONTINUAR →':'PULAR →';next.disabled=false;
 }
@@ -81,11 +84,12 @@ function buildPrayer(){
   choices[2].length?{emoji:'🙏',text:`Senhor, reconheço que ${sentence(stepTexts(2))}. Tem misericórdia de mim e perdoa-me.`}:null,
   choices[3].length?{emoji:'🌻',text:`Eu te agradeço ${sentence(stepTexts(3))}.`}:null,
   choices[4].length?{emoji:'🤲',text:`Senhor, eu te peço: ${sentence(stepTexts(4))}.`}:null,
+  customRequest?{emoji:'📝',text:`Senhor, também te apresento este pedido: ${customRequest}`}:null,
   choices[5].length?{emoji:'🙏',text:`Eu intercedo: ${sentence(stepTexts(5))}.`}:null,
   selectedDevotions.length?{emoji:'🕯️',text:`${selectedDevotions.join(', ')}, intercedei por mim junto a Jesus.`}:null,
   resolution?{emoji:'👣',text:`${resolution.meaning}. Espírito Santo, ajuda-me a cumprir este propósito.`}:null
  ].filter(Boolean);
- $('#prayerSummary').innerHTML=paragraphs.map(item=>`<p><span class="summary-emoji" aria-hidden="true">${item.emoji}</span><span>${item.text}</span></p>`).join('');
+ $('#prayerSummary').innerHTML=paragraphs.map(item=>`<p><span class="summary-emoji" aria-hidden="true">${item.emoji}</span><span>${escapeHtml(item.text)}</span></p>`).join('');
  renderConfessionGuidance();prayer.hidden=true;$('#closing').hidden=false;window.scrollTo({top:$('#closing').offsetTop,behavior:'smooth'});
 }
 function renderConfessionGuidance(){
@@ -110,7 +114,7 @@ $('#finishButton').addEventListener('click',()=>{
  window.scrollTo({top:$('#prayerComplete').offsetTop,behavior:'smooth'});
 });
 $('#homeButton').addEventListener('click',()=>{
- current=0;saintName='';choices=steps.map(()=>[]);choices[0]=['pai','jesus','espirito'];activeGroups=steps.map(()=>-1);
+ current=0;saintName='';customRequest='';choices=steps.map(()=>[]);choices[0]=['pai','jesus','espirito'];activeGroups=steps.map(()=>-1);
  $('#prayerComplete').hidden=true;
  $('.hero').hidden=false;$('.how').hidden=false;$('.our-father').hidden=false;
  window.scrollTo({top:0,behavior:'smooth'});

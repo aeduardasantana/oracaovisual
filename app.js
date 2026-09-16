@@ -117,3 +117,10 @@ $('#homeButton').addEventListener('click',()=>{
 });
 function updateHabit(){const today=new Date().toISOString().slice(0,10);$('#habitCount').textContent=localStorage.getItem('oracaoVisualLast')===today?'✓':'○'}
 $('#habitButton').addEventListener('click',()=>{const toast=document.createElement('div');toast.className='toast';toast.textContent=$('#habitCount').textContent==='✓'?'Sua oração de hoje foi concluída.':'Sua oração de hoje ainda espera por você.';document.body.append(toast);setTimeout(()=>toast.remove(),2800)});updateHabit();
+
+let installPrompt;
+const installButton=$('#installAppButton');
+window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;installButton.hidden=false});
+installButton.addEventListener('click',async()=>{if(!installPrompt)return;installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;installButton.hidden=true});
+window.addEventListener('appinstalled',()=>{installPrompt=null;installButton.hidden=true});
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));

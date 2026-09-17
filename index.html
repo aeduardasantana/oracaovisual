@@ -17,6 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20260916-5">
+  <link rel="stylesheet" href="oracoes-ilustradas.css?v=20260917-2">
 </head>
 <body>
   <header class="topbar">
@@ -64,52 +65,27 @@
       <ol><li><b>Presença:</b> Pai nosso que estais nos céus.</li><li><b>Deus:</b> três petições voltadas à glória do Pai.</li><li><b>Nós:</b> quatro petições sobre nossas necessidades.</li></ol>
     </section>
 
+    <section class="illustrated-access" aria-labelledby="oracoes-ilustradas-home">
+      <div><p class="eyebrow blue">ORAÇÕES ILUSTRADAS</p><h2 id="oracoes-ilustradas-home">Ore com imagens</h2><p>Orações conhecidas conduzidas visualmente, uma imagem de cada vez.</p></div>
+      <a class="illustrated-access-button" href="oracoes-ilustradas.html">ACESSAR ORAÇÕES ILUSTRADAS <span>→</span></a>
+    </section>
+
     <section class="prayer" id="orar" hidden>
       <div class="progress" aria-label="Progresso da oração"><span id="progressBar"></span></div>
       <div id="stepContent" aria-live="polite"></div>
-      <div class="navigation">
-        <button class="secondary" id="backButton" type="button">VOLTAR</button>
-        <button class="primary" id="nextButton" type="button">CONTINUAR <span>→</span></button>
-      </div>
+      <div class="navigation"><button class="secondary" id="backButton" type="button">VOLTAR</button><button class="primary" id="nextButton" type="button">CONTINUAR <span>→</span></button></div>
     </section>
 
     <section class="closing" id="closing" hidden aria-live="polite">
-      <div class="closing-symbol">✦</div>
-      <p class="eyebrow gold">SUA ORAÇÃO DE HOJE</p>
-      <h2>Senhor, eu estou aqui.</h2>
-      <div id="prayerSummary" class="summary"></div>
-      <p class="fixed-ending">Em nome de Jesus.<br><strong>Amém.</strong></p>
-      <div id="confessionGuidance"></div>
-      <button class="primary" id="finishButton" type="button">CONCLUIR ORAÇÃO</button>
+      <div class="closing-symbol">✦</div><p class="eyebrow gold">SUA ORAÇÃO DE HOJE</p><h2>Senhor, eu estou aqui.</h2><div id="prayerSummary" class="summary"></div><p class="fixed-ending">Em nome de Jesus.<br><strong>Amém.</strong></p><div id="confessionGuidance"></div><button class="primary" id="finishButton" type="button">CONCLUIR ORAÇÃO</button>
     </section>
 
     <section class="prayer-complete" id="prayerComplete" hidden aria-live="polite">
-      <div class="incense-scene" role="img" aria-label="Incenso subindo ao céu como símbolo da oração">
-        <span class="smoke smoke-one"></span>
-        <span class="smoke smoke-two"></span>
-        <span class="smoke smoke-three"></span>
-        <span class="incense-glow"></span>
-        <span class="incense-bowl">♨</span>
-      </div>
-      <p class="eyebrow gold">ORAÇÃO CONCLUÍDA</p>
-      <h2>Minha oração sobe a ti, Senhor.</h2>
-      <p class="incense-verse">“Suba à tua presença a minha oração como incenso.”<br><strong>Salmo 141,2</strong></p>
-      <button class="primary home-button" id="homeButton" type="button"><span aria-hidden="true">⌂</span> VOLTAR AO INÍCIO</button>
+      <div class="incense-scene" role="img" aria-label="Incenso subindo ao céu como símbolo da oração"><span class="smoke smoke-one"></span><span class="smoke smoke-two"></span><span class="smoke smoke-three"></span><span class="incense-glow"></span><span class="incense-bowl">♨</span></div><p class="eyebrow gold">ORAÇÃO CONCLUÍDA</p><h2>Minha oração sobe a ti, Senhor.</h2><p class="incense-verse">“Suba à tua presença a minha oração como incenso.”<br><strong>Salmo 141,2</strong></p><button class="primary home-button" id="homeButton" type="button"><span aria-hidden="true">⌂</span> VOLTAR AO INÍCIO</button>
     </section>
   </main>
 
-  <footer>
-    <strong>Oração Visual</strong>
-      <p>Recurso visual de apoio à oração pessoal, fundamentado no Catecismo da Igreja Católica. A palavra escrita acompanha cada imagem para acessibilidade em Libras.</p>
-      <p class="reference">Referências: CIC 2626-2643 · Mt 6,9-13 · Tratado da Verdadeira Devoção · Patris corde</p>
-    <button class="install-app" id="installAppButton" type="button" hidden>INSTALAR APLICATIVO</button>
-    <p class="footer-rights">© 2026 Eduarda Bispo. Todos os direitos reservados.<br><a href="mailto:contato@compassrosesystems.com.br">contato@compassrosesystems.com.br</a></p>
-    <span class="footer-brand">Desenvolvido por Compass Rose Systems</span>
-  </footer>
-
+  <footer><strong>Oração Visual</strong><p>Recurso visual de apoio à oração pessoal, fundamentado no Catecismo da Igreja Católica. A palavra escrita acompanha cada imagem para acessibilidade em Libras.</p><p class="reference">Referências: CIC 2626-2643 · Mt 6,9-13 · Tratado da Verdadeira Devoção · Patris corde</p><button class="install-app" id="installAppButton" type="button" hidden>INSTALAR APLICATIVO</button><p class="footer-rights">© 2026 Eduarda Bispo. Todos os direitos reservados.<br><a href="mailto:contato@compassrosesystems.com.br">contato@compassrosesystems.com.br</a></p><span class="footer-brand">Desenvolvido por Compass Rose Systems</span></footer>
   <div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
-  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-  <script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
-  <script src="app.js?v=20260916-5"></script>
-</body>
-</html>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script><script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script><script src="app.js?v=20260916-5"></script>
+</body></html>

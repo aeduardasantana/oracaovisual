@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20260916-5">
-  <link rel="stylesheet" href="oracoes-ilustradas.css?v=20260917-5">
+  <link rel="stylesheet" href="oracoes-ilustradas.css?v=20260917-6">
 </head>
 <body>
   <header class="topbar">
@@ -26,27 +26,42 @@
   </header>
 
   <main>
-    <section class="hero" id="inicio">
-      <img src="assets/oracao-visual-hero.webp" alt="Jesus ao centro, Deus Pai, o Espírito Santo, Santa Maria e São José em uma paisagem iluminada">
-      <div class="hero-shade"></div>
-      <div class="hero-content">
-        <p class="eyebrow">UM ENCONTRO DIÁRIO</p>
-        <h1>Reze com<br>o que você vê.</h1>
-        <p>Escolha imagens. Reconheça o que deseja dizer a Deus. Cultive o hábito da oração diária.</p>
-        <button class="primary prayer-cta" id="startButton" type="button"><b aria-hidden="true">🧎‍♀️🙏</b> FAZER ORAÇÃO GUIADA <span>→</span></button>
+    <section class="illustrated-hero" id="inicio" aria-labelledby="oracoes-ilustradas-home">
+      <div class="illustrated-hero-copy">
+        <p class="eyebrow gold">ORAÇÕES ILUSTRADAS</p>
+        <h1 id="oracoes-ilustradas-home">Ore com imagens.</h1>
+        <p class="illustrated-hero-intro">Acompanhe orações conhecidas por imagens que ajudam a compreender cada parte da oração.</p>
+        <div class="illustrated-hero-actions">
+          <a class="illustrated-main-button" href="oracoes-ilustradas.html">ACESSAR ORAÇÕES ILUSTRADAS <span>→</span></a>
+          <a class="personalized-link" href="#oracao-personalizada">Fazer uma oração personalizada</a>
+        </div>
+      </div>
+      <img class="illustrated-hero-cover" src="assets/oracoes-ilustradas/capas/capa-oracoes-ilustradas.png.png" alt="Composição visual que apresenta a experiência de rezar com imagens">
+      <div class="featured-prayers" aria-label="Orações ilustradas disponíveis">
+        <a href="ave-maria.html"><img src="assets/oracoes-ilustradas/capas/capa-ave-maria.png.png" alt=""><span><small>ORAÇÃO ILUSTRADA</small><strong>Ave-Maria</strong></span><b>→</b></a>
+        <a href="pai-nosso.html"><img src="assets/oracoes-ilustradas/capas/capa-pai-nosso.png.png" alt=""><span><small>ORAÇÃO ILUSTRADA</small><strong>Pai-Nosso</strong></span><b>→</b></a>
       </div>
     </section>
 
-    <section class="illustrated-access" aria-labelledby="oracoes-ilustradas-home">
-      <img class="illustrated-access-cover" src="assets/oracoes-ilustradas/capas/capa-oracoes-ilustradas.png.png" alt="" aria-hidden="true">
-      <div class="illustrated-access-copy"><p class="eyebrow blue">ORAÇÕES ILUSTRADAS</p><h2 id="oracoes-ilustradas-home">Ore com imagens</h2><p>Orações conhecidas conduzidas visualmente, uma imagem de cada vez.</p></div>
-      <a class="illustrated-access-button" href="oracoes-ilustradas.html">ACESSAR ORAÇÕES ILUSTRADAS <span>→</span></a>
+    <section class="personalized-prayer" id="oracao-personalizada" aria-labelledby="personalizada-titulo">
+      <div>
+        <p class="eyebrow gold">UMA ORAÇÃO A PARTIR DO QUE VOCÊ DESEJA DIZER A DEUS</p>
+        <h2 id="personalizada-titulo">Monte sua oração com imagens.</h2>
+        <p>Jesus nos ensinou no Pai-Nosso um caminho para a oração: primeiro nos voltamos para Deus; depois apresentamos nossas necessidades.</p>
+        <p>Escolha imagens que representem aquilo que você deseja apresentar a Deus. Ao final, sua oração será organizada para que você possa rezá-la visualmente.</p>
+        <button class="primary prayer-cta" id="startButton" type="button">CRIAR MINHA ORAÇÃO <span>→</span></button>
+      </div>
+      <ol class="personalized-path">
+        <li><b>Presença:</b> reconheça diante de quem você está.</li>
+        <li><b>Deus:</b> louve, adore e busque a vontade do Pai.</li>
+        <li><b>Nós:</b> apresente suas necessidades, peça perdão, auxílio e proteção.</li>
+      </ol>
     </section>
 
-    <section class="how" aria-labelledby="como-funciona">
-      <p class="eyebrow blue">CINCO TIPOS DE ORAÇÃO</p>
-      <h2 id="como-funciona">A imagem ajuda você a reconhecer a intenção da sua oração.</h2>
-      <p class="catechism">Conforme o Catecismo da Igreja Católica, parágrafos 2626 a 2643.</p>
+    <section class="how catechesis-section" aria-labelledby="como-funciona">
+      <p class="eyebrow blue">APRENDA MAIS SOBRE A ORAÇÃO</p>
+      <h2 id="como-funciona">Cinco tipos de oração</h2>
+      <p class="catechism">Conforme o Catecismo da Igreja Católica, §§ 2626–2643.</p>
       <div class="purpose-grid">
         <article><span>🙌</span><h3>BÊNÇÃO E ADORAÇÃO</h3><p>Reconhecer a grandeza de Deus e responder aos seus dons.</p></article>
         <article><span>🌟</span><h3>LOUVOR</h3><p>Amar e glorificar a Deus simplesmente por quem Ele é.</p></article>
@@ -64,11 +79,6 @@
           <div><strong>DULIA</strong><span>VENERAÇÃO</span><p>Aos demais santos, amigos de Deus e intercessores.</p></div>
         </div>
       </details>
-    </section>
-
-    <section class="our-father" aria-labelledby="modelo-perfeito">
-      <div><p class="eyebrow gold">O MODELO ENSINADO POR JESUS</p><h2 id="modelo-perfeito">O Pai-Nosso orienta toda oração.</h2><p>Primeiro buscamos a glória, o Reino e a vontade do Pai. Depois apresentamos o pão, o perdão, a perseverança e a libertação do mal.</p></div>
-      <ol><li><b>Presença:</b> Pai nosso que estais nos céus.</li><li><b>Deus:</b> três petições voltadas à glória do Pai.</li><li><b>Nós:</b> quatro petições sobre nossas necessidades.</li></ol>
     </section>
 
     <section class="prayer" id="orar" hidden>

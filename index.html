@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20260916-5">
-  <link rel="stylesheet" href="oracoes-ilustradas.css?v=20260917-6">
+  <link rel="stylesheet" href="oracoes-ilustradas.css?v=20260917-7">
 </head>
 <body>
   <header class="topbar">
@@ -26,36 +26,43 @@
   </header>
 
   <main>
-    <section class="illustrated-hero" id="inicio" aria-labelledby="oracoes-ilustradas-home">
-      <div class="illustrated-hero-copy">
-        <p class="eyebrow gold">ORAÇÕES ILUSTRADAS</p>
-        <h1 id="oracoes-ilustradas-home">Ore com imagens.</h1>
-        <p class="illustrated-hero-intro">Acompanhe orações conhecidas por imagens que ajudam a compreender cada parte da oração.</p>
-        <div class="illustrated-hero-actions">
-          <a class="illustrated-main-button" href="oracoes-ilustradas.html">ACESSAR ORAÇÕES ILUSTRADAS <span>→</span></a>
-          <a class="personalized-link" href="#oracao-personalizada">Fazer uma oração personalizada</a>
-        </div>
-      </div>
-      <img class="illustrated-hero-cover" src="assets/oracoes-ilustradas/capas/capa-oracoes-ilustradas.png.png" alt="Composição visual que apresenta a experiência de rezar com imagens">
-      <div class="featured-prayers" aria-label="Orações ilustradas disponíveis">
-        <a href="ave-maria.html"><img src="assets/oracoes-ilustradas/capas/capa-ave-maria.png.png" alt=""><span><small>ORAÇÃO ILUSTRADA</small><strong>Ave-Maria</strong></span><b>→</b></a>
-        <a href="pai-nosso.html"><img src="assets/oracoes-ilustradas/capas/capa-pai-nosso.png.png" alt=""><span><small>ORAÇÃO ILUSTRADA</small><strong>Pai-Nosso</strong></span><b>→</b></a>
+    <section class="hero" id="inicio">
+      <img src="assets/oracao-visual-hero.webp" alt="Jesus ao centro, Deus Pai, o Espírito Santo, Santa Maria e São José em uma paisagem iluminada">
+      <div class="hero-shade"></div>
+      <div class="hero-content">
+        <p class="eyebrow">ORAÇÃO VISUAL</p>
+        <h1>Reze com<br>o que você vê.</h1>
+        <p>Duas formas de viver a oração com apoio visual: acompanhe uma oração conhecida ou participe de uma oração guiada interativa.</p>
       </div>
     </section>
 
-    <section class="personalized-prayer" id="oracao-personalizada" aria-labelledby="personalizada-titulo">
-      <div>
-        <p class="eyebrow gold">UMA ORAÇÃO A PARTIR DO QUE VOCÊ DESEJA DIZER A DEUS</p>
-        <h2 id="personalizada-titulo">Monte sua oração com imagens.</h2>
-        <p>Jesus nos ensinou no Pai-Nosso um caminho para a oração: primeiro nos voltamos para Deus; depois apresentamos nossas necessidades.</p>
-        <p>Escolha imagens que representem aquilo que você deseja apresentar a Deus. Ao final, sua oração será organizada para que você possa rezá-la visualmente.</p>
-        <button class="primary prayer-cta" id="startButton" type="button">CRIAR MINHA ORAÇÃO <span>→</span></button>
+    <section class="illustrated-access" aria-labelledby="oracoes-ilustradas-home">
+      <img class="illustrated-access-cover" src="assets/oracoes-ilustradas/capas/capa-oracoes-ilustradas.png.png" alt="" aria-hidden="true">
+      <div class="illustrated-access-copy">
+        <p class="eyebrow blue">ORAÇÕES ILUSTRADAS</p>
+        <h2 id="oracoes-ilustradas-home">Ore com imagens</h2>
+        <p>Acompanhe orações conhecidas por imagens que ajudam a compreender cada parte da oração.</p>
       </div>
-      <ol class="personalized-path">
-        <li><b>Presença:</b> reconheça diante de quem você está.</li>
-        <li><b>Deus:</b> louve, adore e busque a vontade do Pai.</li>
-        <li><b>Nós:</b> apresente suas necessidades, peça perdão, auxílio e proteção.</li>
-      </ol>
+      <a class="illustrated-access-button" href="oracoes-ilustradas.html">ACESSAR ORAÇÕES ILUSTRADAS <span>→</span></a>
+    </section>
+
+    <section class="guided-prayer" id="oracao-guiada" aria-labelledby="guiada-titulo">
+      <div>
+        <p class="eyebrow gold">ORAÇÃO GUIADA INTERATIVA</p>
+        <h2 id="guiada-titulo">Uma experiência para conduzir sua oração pessoal.</h2>
+        <p>Você participa de um percurso guiado para reconhecer o que deseja apresentar a Deus. As escolhas feitas durante a experiência ajudam a organizar sua oração pessoal.</p>
+        <button class="primary prayer-cta" id="startButton" type="button">FAZER ORAÇÃO GUIADA <span>→</span></button>
+      </div>
+      <div class="our-father-guide">
+        <p class="eyebrow gold">O MODELO ENSINADO POR JESUS</p>
+        <h3>O Pai-Nosso orienta toda oração.</h3>
+        <p>Primeiro buscamos a glória, o Reino e a vontade do Pai. Depois apresentamos o pão, o perdão, a perseverança e a libertação do mal.</p>
+        <ol>
+          <li><b>Presença:</b> Pai nosso que estais nos céus.</li>
+          <li><b>Deus:</b> três petições voltadas à glória do Pai.</li>
+          <li><b>Nós:</b> quatro petições sobre nossas necessidades.</li>
+        </ol>
+      </div>
     </section>
 
     <section class="how catechesis-section" aria-labelledby="como-funciona">
@@ -96,7 +103,7 @@
     </section>
   </main>
 
-  <footer><strong>Oração Visual</strong><p>Recurso visual de apoio à oração pessoal, fundamentado no Catecismo da Igreja Católica. A palavra escrita acompanha cada imagem para acessibilidade em Libras.</p><p class="reference">Referências: CIC 2626-2643 · Mt 6,9-13 · Tratado da Verdadeira Devoção · Patris corde</p><button class="install-app" id="installAppButton" type="button" hidden>INSTALAR APLICATIVO</button><p class="footer-rights">© 2026 Eduarda Bispo. Todos os direitos reservados.<br><a href="mailto:contato@compassrosesystems.com.br">contato@compassrosesystems.com.br</a></p><span class="footer-brand">Desenvolvido por Compass Rose Systems</span></footer>
+  <footer><strong>Oração Visual</strong><p>Recurso visual de apoio à oração pessoal, fundamentado no Catecismo da Igreja Católica. A palavra escrita acompanha cada imagem para acessibilidade em Libras.</p><p class="reference">Referências: CIC 2626-2643 · Mt 6,9-13 · Tratado da Verdadeira Devoção · Patris corde</p><button class="install-app" id="installAppButton" type="button" hidden>INSTALAR APLICATIVO</button><p class="footer-rights">© 2026 Eduarda Bispo. Todos os direitos reservados.<br><a href="mailto:contato@compassrosesystems.com.br">contato@compassrosesystems.com.br</a></p><div class="version-history" aria-label="Histórico de versões"><strong>EVOLUÇÃO DO ORAÇÃO VISUAL</strong><span><b>v1.0</b> Oração Guiada</span><span><b>v1.1</b> Fundamentação e catequese</span><span><b>v1.2</b> Ave-Maria Ilustrada</span><span><b>v1.3</b> Pai-Nosso Ilustrado</span></div><span class="footer-brand">Desenvolvido por Compass Rose Systems</span></footer>
   <div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
   <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script><script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script><script src="app.js?v=20260916-5"></script>
 </body></html>

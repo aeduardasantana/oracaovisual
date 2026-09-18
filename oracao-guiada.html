@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#173b63">
+  <title>Oração Guiada Interativa - Oração Visual</title>
+  <link rel="icon" href="assets/app-icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260916-5">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">✦</span><span>Oração Visual</span></a><button class="habit" id="habitButton" type="button" aria-label="Ver hábito de oração"><span>Hoje</span><strong id="habitCount">○</strong></button></header>
+<main>
+    <section class="prayer" id="orar">
+      <div class="progress" aria-label="Progresso da oração"><span id="progressBar"></span></div>
+      <div id="stepContent" aria-live="polite"></div>
+      <div class="navigation"><button class="secondary" id="backButton" type="button">VOLTAR</button><button class="primary" id="nextButton" type="button">CONTINUAR <span>→</span></button></div>
+    </section>
+
+    <section class="closing" id="closing" hidden aria-live="polite">
+      <div class="closing-symbol">✦</div><p class="eyebrow gold">SUA ORAÇÃO DE HOJE</p><h2>Senhor, eu estou aqui.</h2><div id="prayerSummary" class="summary"></div><p class="fixed-ending">Em nome de Jesus.<br><strong>Amém.</strong></p><div id="confessionGuidance"></div><button class="primary" id="finishButton" type="button">CONCLUIR ORAÇÃO</button>
+    </section>
+
+    <section class="prayer-complete" id="prayerComplete" hidden aria-live="polite">
+      <div class="incense-scene" role="img" aria-label="Incenso subindo ao céu como símbolo da oração"><span class="smoke smoke-one"></span><span class="smoke smoke-two"></span><span class="smoke smoke-three"></span><span class="incense-glow"></span><span class="incense-bowl">♨</span></div><p class="eyebrow gold">ORAÇÃO CONCLUÍDA</p><h2>Minha oração sobe a ti, Senhor.</h2><p class="incense-verse">“Suba à tua presença a minha oração como incenso.”<br><strong>Salmo 141,2</strong></p><button class="primary home-button" id="homeButton" type="button"><span aria-hidden="true">⌂</span> VOLTAR AO INÍCIO</button>
+    </section>
+
+</main>
+<footer><strong>Oração Visual</strong><p>Oração Guiada Interativa</p><p class="site-version">Versão 1.3</p><span class="footer-brand">Desenvolvido por Compass Rose Systems</span></footer>
+<div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script><script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script><script src="app.js?v=20260917-2"></script>
+</body></html>

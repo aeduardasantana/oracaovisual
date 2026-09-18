@@ -30,8 +30,6 @@ Aplicação web católica, mobile-first, para apoiar o hábito da oração diár
 
 Endereço planejado: `https://oracaovisual.compassrosesystems.com.br`.
 
-Abra `index.html` ou publique o repositório pelo GitHub Pages. Não há banco de dados nem etapa de instalação.
-
 ## Imagens
 
 A ilustração principal foi criada originalmente para este projeto. As demais imagens devem ser inseridas somente após validação visual individual de correspondência com cada conceito. Novas imagens podem ser cadastradas em `app.js`; registre sempre título, texto alternativo, origem, autor e licença.

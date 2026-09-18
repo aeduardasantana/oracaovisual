@@ -103,7 +103,7 @@ function renderConfessionGuidance(){
  box.innerHTML=`<section class="confession-box"><div class="confession-head"><span aria-hidden="true">🕊️</span><div><p>DEPOIS DE PEDIR PERDÃO</p><h3>Prepare-se para a Confissão</h3></div></div><p>Procure confessar-se com um sacerdote assim que for possível. Anote o que você reconheceu nesta oração para não esquecer, mas faça também um exame de consciência completo.</p><div class="confession-notes"><strong>ANOTE PARA LEMBRAR:</strong><ul>${marked.map(item=>`<li><span aria-hidden="true">□</span> ${item.label}</li>`).join('')}</ul></div><p class="sacrament-note">Esta oração ajuda na preparação, mas não substitui o Sacramento da Reconciliação.</p><div class="bible-box"><h4>CONFISSÃO, GRAÇA E CURA NA BÍBLIA</h4><p><b>João 20,22-23</b><span>Jesus entrega aos Apóstolos a missão de perdoar os pecados.</span></p><p><b>Tiago 5,16</b><span>Confessar os pecados e rezar uns pelos outros está ligado à cura.</span></p><p><b>1 João 1,9</b><span>Deus é fiel: perdoa e purifica quem reconhece os pecados.</span></p><p><b>Salmo 32,5</b><span>Quem reconhece a própria culpa encontra o perdão de Deus.</span></p></div><div class="contrition"><h4>ESCOLHA UMA ORAÇÃO DE ARREPENDIMENTO</h4><div class="contrition-buttons">${prayers.map((item,index)=>`<button type="button" data-prayer="${index}">${item.title}${item.note?`<small>${item.note}</small>`:''}<span>+</span></button>`).join('')}</div><div class="contrition-text" hidden></div></div></section>`;
  box.querySelectorAll('[data-prayer]').forEach(button=>button.addEventListener('click',()=>{const target=box.querySelector('.contrition-text'),item=prayers[Number(button.dataset.prayer)],isSame=target.dataset.open===button.dataset.prayer&&!target.hidden;box.querySelectorAll('[data-prayer] span').forEach(icon=>icon.textContent='+');if(isSame){target.hidden=true;target.dataset.open='';return}target.innerHTML=`<p>${item.text}</p>`;target.hidden=false;target.dataset.open=button.dataset.prayer;button.querySelector('span').textContent='−'}));
 }
-startButton.addEventListener('click',()=>{$('.hero').hidden=true;$('.how').hidden=true;$('.our-father').hidden=true;prayer.hidden=false;render();window.scrollTo({top:0,behavior:'smooth'})});
+startButton.addEventListener('click',()=>{$('.hero').hidden=true;$('.illustrated-access').hidden=true;$('.guided-prayer').hidden=true;$('.how').hidden=true;prayer.hidden=false;render();window.scrollTo({top:0,behavior:'smooth'})});
 back.addEventListener('click',()=>{if(current>0){current--;render();window.scrollTo({top:0,behavior:'smooth'})}});
 next.addEventListener('click',()=>{if(current<steps.length-1){current++;render();window.scrollTo({top:0,behavior:'smooth'})}else buildPrayer()});
 $('#finishButton').addEventListener('click',()=>{
@@ -116,7 +116,7 @@ $('#finishButton').addEventListener('click',()=>{
 $('#homeButton').addEventListener('click',()=>{
  current=0;saintName='';customRequest='';choices=steps.map(()=>[]);choices[0]=['pai','jesus','espirito'];activeGroups=steps.map(()=>-1);
  $('#prayerComplete').hidden=true;
- $('.hero').hidden=false;$('.how').hidden=false;$('.our-father').hidden=false;
+ $('.hero').hidden=false;$('.illustrated-access').hidden=false;$('.guided-prayer').hidden=false;$('.how').hidden=false;
  window.scrollTo({top:0,behavior:'smooth'});
 });
 function updateHabit(){const today=new Date().toISOString().slice(0,10);$('#habitCount').textContent=localStorage.getItem('oracaoVisualLast')===today?'✓':'○'}

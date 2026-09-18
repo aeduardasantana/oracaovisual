@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173b63">
+  <title>Pai-Nosso Ilustrada - Oração Visual</title>
+  <link rel="icon" href="assets/app-icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260917-3">
+  <link rel="stylesheet" href="ave-maria.css?v=20260917-3">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">✦</span><span>Oração Visual</span></a></header>
+<main class="visual-prayer-page">
+  <div class="prayer-top">
+    <a href="oracoes-ilustradas.html">← ORAÇÕES ILUSTRADAS</a>
+    <div><p class="eyebrow blue">PAI-NOSSO</p><h1>Ore com imagens</h1></div>
+    <p class="sequence-label" id="sequenceLabel">1 de 11</p>
+  </div>
+  <section class="visual-stage" aria-live="polite">
+    <figure class="prayer-slide active"><span class="slide-number">1</span><img src="assets/oracoes-ilustradas/pai-nosso/01.webp" alt="Família reunida em oração diante de Deus" draggable="false"><figcaption>Pai nosso, que estais nos céus,</figcaption></figure>
+    <figure class="prayer-slide"><span class="slide-number">2</span><img src="assets/oracoes-ilustradas/pai-nosso/02.webp" alt="Pessoa busca a santidade de Deus em meio ao conflito" draggable="false" loading="lazy"><figcaption>santificado seja o vosso Nome;</figcaption></figure>
+    <figure class="prayer-slide"><span class="slide-number">3</span><img src="assets/oracoes-ilustradas/pai-nosso/03.webp" alt="Reconciliação e acolhimento como sinais do Reino de Deus" draggable="false" loading="lazy"><figcaption>venha a nós o vosso Reino;</figcaption></figure>
+    <figure class="prayer-slide"><span class="slide-number">4</span><img src="assets/oracoes-ilustradas/pai-nosso/04.webp" alt="Pessoa escolhe a vontade de Deus diante da tentação" draggable="false" loading="lazy"><figcaption>seja feita a vossa vontade,</figcaption></figure>
+    <figure class="prayer-slide"><span class="slide-number">5</span><img src="assets/oracoes-ilustradas/pai-nosso/05.webp" alt="Pessoas deixam as trevas e caminham para a luz de Deus" draggable="false" loading="lazy"><figcaption>assim na terra como no céu.</figcaption></figure>
+    <figure class="prayer-slide"><span class="slide-number">6</span><img src="assets/oracoes-ilustradas/pai-nosso/06.webp" alt="Pessoas em oração diante de Deus, fonte do pão cotidiano" draggable="false" loading="lazy"><figcaption>O pão nosso de cada dia nos dai hoje;</figcaption></figure>
+    <figure class="prayer-slide"><span class="slide-number">7</span><img src="assets/oracoes-ilustradas/pai-nosso/07.webp" alt="Jesus ensina seus discípulos a buscar o perdão" draggable="false" loading="lazy"><figcaption>perdoai-nos as nossas ofensas,</figcaption></figure>
+    <figure class="prayer-slide"><span class="slide-number">8</span><img src="assets/oracoes-ilustradas/pai-nosso/08.webp" alt="Pessoa oferece perdão e reconciliação" draggable="false" loading="lazy"><figcaption>assim como nós perdoamos a quem nos tem ofendido;</figcaption></figure>
+    <figure class="prayer-slide"><span class="slide-number">9</span><img src="assets/oracoes-ilustradas/pai-nosso/09.webp" alt="Pessoa pede a ajuda de Deus diante da tentação" draggable="false" loading="lazy"><figcaption>e não nos deixeis cair em tentação,</figcaption></figure>
+    <figure class="prayer-slide"><span class="slide-number">10</span><img src="assets/oracoes-ilustradas/pai-nosso/10.webp" alt="Pessoas são conduzidas para fora do mal em direção à luz de Deus" draggable="false" loading="lazy"><figcaption>mas livrai-nos do Mal.</figcaption></figure>
+    <figure class="prayer-slide"><span class="slide-number">11</span><img src="assets/oracoes-ilustradas/pai-nosso/11.webp" alt="Pessoas em oração confiam a Deus tudo o que pediram" draggable="false" loading="lazy"><figcaption>Amém.</figcaption></figure>
+  </section>  <div class="visual-navigation">
+    <button id="prev" type="button" disabled>← ANTERIOR</button>
+    <div class="dots" id="dots" aria-label="Sequência da oração"></div>
+    <button id="next" type="button">PRÓXIMA →</button>
+  </div>
+  <p class="illustration-credit">Ilustrações desenvolvidas por Eduarda Bispo com auxílio de inteligência artificial. © 2026 Eduarda Bispo.</p>
+</main>
+<div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+<script>
+const slides=[...document.querySelectorAll('.prayer-slide')];
+const prev=document.getElementById('prev');
+const next=document.getElementById('next');
+const label=document.getElementById('sequenceLabel');
+const dots=document.getElementById('dots');
+let current=0;
+slides.forEach((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Ir para imagem '+(i+1));b.addEventListener('click',()=>show(i));dots.appendChild(b)});
+function show(i){current=i;slides.forEach((s,n)=>s.classList.toggle('active',n===i));[...dots.children].forEach((d,n)=>d.classList.toggle('active',n===i));label.textContent=(i+1)+' de '+slides.length;prev.disabled=i===0;next.textContent=i===slides.length-1?'CONCLUIR':'PRÓXIMA →'}
+prev.addEventListener('click',()=>show(Math.max(0,current-1)));
+next.addEventListener('click',()=>current===slides.length-1?location.href='oracoes-ilustradas.html':show(current+1));
+document.querySelector('.visual-stage').addEventListener('contextmenu',e=>{if(e.target.tagName==='IMG')e.preventDefault()});
+show(0);
+</script>
+</body>
+</html>

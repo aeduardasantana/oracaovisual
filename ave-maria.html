@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="ave-maria.css?v=20260917-3">
 </head>
 <body>
-<header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">✦</span><span>Oração Visual</span></a></header>
+<header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">✦</span><span>Oração Visual</span></a><button class="install-header" id="installHeaderButton" type="button">INSTALAR APP</button></header>
 <main class="visual-prayer-page">
   <div class="prayer-top">
     <a href="oracoes-ilustradas.html">← ORAÇÕES ILUSTRADAS</a>
@@ -56,5 +56,6 @@ next.addEventListener('click',()=>current===slides.length-1?location.href='oraco
 document.querySelector('.visual-stage').addEventListener('contextmenu',e=>{if(e.target.tagName==='IMG')e.preventDefault()});
 show(0);
 </script>
+<script src="pwa-install.js?v=20260918-1"></script>
 </body>
 </html>

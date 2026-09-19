@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20260918-6">
-  <link rel="stylesheet" href="ave-maria.css?v=20260917-3">
+  <link rel="stylesheet" href="ave-maria.css?v=20260919-1">
 </head>
 <body>
 <header class="topbar">
@@ -40,6 +40,21 @@
     <div class="dots" id="dots" aria-label="Sequência da oração"></div>
     <button id="next" type="button">PRÓXIMA →</button>
   </div>
+  <section class="completion-panel" id="completionPanel" hidden aria-live="polite">
+    <strong>ORAÇÃO CONCLUÍDA</strong>
+    <p>Você pode reiniciar e rezar novamente desde o primeiro quadro.</p>
+    <div class="completion-actions">
+      <button id="restartPrayer" type="button">↻ REINICIAR / REPETIR ORAÇÃO</button>
+      <a href="oracoes-ilustradas.html">VOLTAR ÀS ORAÇÕES</a>
+    </div>
+  </section>
+  <section class="printable-offer" aria-label="Pai Nosso Ilustrado em PDF">
+    <p class="printable-offer-title">Pai Nosso Ilustrado - recurso visual para aprender, compreender e rezar.</p>
+    <a class="printable-offer-button" href="https://checkout.infinitepay.io/aeduardabispo/d8TpvvyJav" target="_blank" rel="noopener noreferrer">
+      <span>(ARQUIVO PDF PARA IMPRIMIR)</span>
+      <strong>COMPRAR R$ 9,90</strong>
+    </a>
+  </section>
   <p class="illustration-credit">Ilustrações desenvolvidas por Eduarda Bispo com auxílio de inteligência artificial. © 2026 Eduarda Bispo.</p>
 </main>
 <div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
@@ -51,11 +66,14 @@ const prev=document.getElementById('prev');
 const next=document.getElementById('next');
 const label=document.getElementById('sequenceLabel');
 const dots=document.getElementById('dots');
+const completionPanel=document.getElementById('completionPanel');
+const restartPrayer=document.getElementById('restartPrayer');
 let current=0;
 slides.forEach((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Ir para imagem '+(i+1));b.addEventListener('click',()=>show(i));dots.appendChild(b)});
-function show(i){current=i;slides.forEach((s,n)=>s.classList.toggle('active',n===i));[...dots.children].forEach((d,n)=>d.classList.toggle('active',n===i));label.textContent=(i+1)+' de '+slides.length;prev.disabled=i===0;next.textContent=i===slides.length-1?'CONCLUIR':'PRÓXIMA →'}
+function show(i){current=i;slides.forEach((s,n)=>s.classList.toggle('active',n===i));[...dots.children].forEach((d,n)=>d.classList.toggle('active',n===i));label.textContent=(i+1)+' de '+slides.length;prev.disabled=i===0;next.textContent=i===slides.length-1?'CONCLUIR':'PRÓXIMA →';completionPanel.hidden=true}
 prev.addEventListener('click',()=>show(Math.max(0,current-1)));
-next.addEventListener('click',()=>current===slides.length-1?location.href='oracoes-ilustradas.html':show(current+1));
+next.addEventListener('click',()=>{if(current===slides.length-1){completionPanel.hidden=false;completionPanel.scrollIntoView({behavior:'smooth',block:'center'});return}show(current+1)});
+restartPrayer.addEventListener('click',()=>{show(0);window.scrollTo({top:0,behavior:'smooth'})});
 document.querySelector('.visual-stage').addEventListener('contextmenu',e=>{if(e.target.tagName==='IMG')e.preventDefault()});
 show(0);
 </script>

@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: oracao-visual-locaweb
+  cancel-in-progress: false
+
 jobs:
   deploy:
     name: Deploy

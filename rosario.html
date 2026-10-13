@@ -34,20 +34,19 @@
   <section class="rosary-options" aria-labelledby="rosary-options-title">
     <div>
       <h2 id="rosary-options-title">Escolha seu percurso</h2>
-      <p>Um terço contempla cinco mistérios. O Rosário reúne três ou quatro grupos de mistérios, conforme a forma escolhida.</p>
+      <p>O terço contempla cinco mistérios. O Rosário tradicional reúne 15 mistérios: Gozosos, Dolorosos e Gloriosos.</p>
     </div>
     <label class="rosary-select-label" for="rosaryMode">FORMA DE ORAÇÃO
       <select id="rosaryMode">
         <option value="terco">Santo Terço — 5 mistérios</option>
-        <option value="tradicional">Rosário tradicional — 15 mistérios</option>
-        <option value="completo">Rosário com Luminosos — 20 mistérios</option>
+        <option value="tradicional">Rosário tradicional completo — 15 mistérios</option>
       </select>
     </label>
+    <p class="rosary-day" id="mysteryOfDay" role="status">Mistérios de hoje: Gozosos</p>
     <div class="rosary-picker" id="mysteryPicker">
       <p class="rosary-small-label">ESCOLHA OS MISTÉRIOS DO TERÇO</p>
       <div class="mystery-choices" role="group" aria-label="Mistérios do terço">
         <button type="button" data-group="gozosos" aria-pressed="true"><strong>Gozosos</strong><small>Encarnação e infância</small></button>
-        <button type="button" data-group="luminosos" aria-pressed="false"><strong>Luminosos</strong><small>Vida pública de Jesus</small></button>
         <button type="button" data-group="dolorosos" aria-pressed="false"><strong>Dolorosos</strong><small>Paixão e morte</small></button>
         <button type="button" data-group="gloriosos" aria-pressed="false"><strong>Gloriosos</strong><small>Ressurreição e glória</small></button>
       </div>
@@ -72,7 +71,7 @@
             <button type="button" data-zoom="bead">Conta</button>
           </div>
         </div>
-        <svg id="rosaryMap" viewBox="0 0 700 760" role="img" aria-label="Mapa interativo do terço com 59 contas, crucifixo e medalha. A conta atual é destacada." preserveAspectRatio="xMidYMid meet">
+        <svg id="rosaryMap" viewBox="0 0 700 820" role="img" aria-label="Mapa interativo do terço com 59 contas, crucifixo e medalha. A conta atual é destacada." preserveAspectRatio="xMidYMid meet">
           <title>Mapa do Santo Terço</title>
           <desc>São 50 contas pequenas e 5 grandes ao redor do círculo, mais 3 pequenas e 1 grande junto à cruz.</desc>
         </svg>
@@ -82,7 +81,7 @@
         <p class="rosary-small-label" id="stepType">PREPARAÇÃO PARA ORAR</p>
         <h3 id="stepTitle">Comece pelo sinal da Cruz</h3>
         <p id="mysteryContext" class="mystery-context" hidden></p>
-        <div class="prayer-image" id="prayerImage" hidden><img id="prayerImageSrc" src="" alt=""></div>
+        <div class="prayer-image" id="prayerImage" hidden><img id="prayerImageSrc" src="" alt=""><p id="frameCaption" class="rosary-image-caption"></p><div class="rosary-image-controls"><button id="framePrev" type="button" aria-label="Imagem anterior da oração">←</button><span id="frameCounter">1 de 10</span><button id="frameNext" type="button" aria-label="Próxima imagem da oração">→</button></div></div>
         <p class="prayer-words" id="stepWords">Em nome do Pai, do Filho e do Espírito Santo. Amém.</p>
         <p class="prayer-reference" id="stepReference"></p>
         <a class="illustrated-prayer-link" id="illustratedLink" href="ave-maria.html" target="_blank" rel="noopener noreferrer" hidden>VER ORAÇÃO ILUSTRADA ↗</a>
@@ -105,7 +104,7 @@
   <section class="rosary-explanation">
     <h2>O que você está contemplando?</h2>
     <p>Os mistérios acompanham a história de Jesus: sua vinda ao mundo, sua vida pública, sua Paixão e sua vitória sobre a morte. O desenho mostra o percurso do terço, enquanto as palavras orientam cada oração.</p>
-    <p><strong>Terço:</strong> cinco mistérios e 59 contas físicas. <strong>Rosário tradicional:</strong> quinze mistérios (Gozosos, Dolorosos e Gloriosos). <strong>Com os Luminosos:</strong> vinte mistérios. O mapa é percorrido novamente a cada grupo.</p>
+    <p><strong>Terço:</strong> cinco mistérios e 59 contas físicas. <strong>Rosário tradicional:</strong> quinze mistérios, com Gozosos, Dolorosos e Gloriosos e 150 Ave-Marias nas dezenas. O mapa é percorrido novamente a cada grupo. A indicação do dia segue o calendário tradicional anterior a 2002: segunda e quinta, Gozosos; terça e sexta, Dolorosos; quarta, sábado e domingo, Gloriosos.</p>
   </section>
 </main>
 <footer>

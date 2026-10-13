@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173b63">
+  <meta name="description" content="Reze o Santo Terço ou o Rosário com um mapa visual de 59 contas e contemple os mistérios da vida de Jesus.">
+  <title>Rosário Visual — Oração Visual</title>
+  <link rel="icon" href="assets/app-icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260918-6">
+  <link rel="stylesheet" href="rosario.css?v=20261012-1">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="index.html" aria-label="Oração Visual - início"><span class="brand-mark">✦</span><span>Oração Visual</span></a>
+  <div class="header-actions">
+    <button class="install-header" id="installHeaderButton" type="button" aria-label="Instalar Oração Visual"><span class="install-icon" aria-hidden="true">⇩</span><span class="install-label">Instalar app</span></button>
+    <button class="habit" id="habitButton" type="button" aria-label="Ver hábito de oração"><span>Hoje</span><strong id="habitCount">○</strong></button>
+  </div>
+</header>
+<main class="rosary-page">
+  <a class="rosary-back" href="oracoes-ilustradas.html">← ORAÇÕES ILUSTRADAS</a>
+  <div class="rosary-hero">
+    <div>
+      <p class="eyebrow blue">ROSÁRIO VISUAL</p>
+      <h1>Acompanhe cada conta.<br>Contemple a vida de Jesus.</h1>
+      <p>Um caminho de oração com Maria: veja onde você está, acompanhe as palavras e avance no seu ritmo.</p>
+    </div>
+    <div class="rosary-symbol" aria-hidden="true"><span>✝</span><span>59 contas</span></div>
+  </div>
+  <section class="rosary-options" aria-labelledby="rosary-options-title">
+    <div>
+      <h2 id="rosary-options-title">Escolha seu percurso</h2>
+      <p>Um terço contempla cinco mistérios. O Rosário reúne três ou quatro grupos de mistérios, conforme a forma escolhida.</p>
+    </div>
+    <label class="rosary-select-label" for="rosaryMode">FORMA DE ORAÇÃO
+      <select id="rosaryMode">
+        <option value="terco">Santo Terço — 5 mistérios</option>
+        <option value="tradicional">Rosário tradicional — 15 mistérios</option>
+        <option value="completo">Rosário com Luminosos — 20 mistérios</option>
+      </select>
+    </label>
+    <div class="rosary-picker" id="mysteryPicker">
+      <p class="rosary-small-label">ESCOLHA OS MISTÉRIOS DO TERÇO</p>
+      <div class="mystery-choices" role="group" aria-label="Mistérios do terço">
+        <button type="button" data-group="gozosos" aria-pressed="true"><strong>Gozosos</strong><small>Encarnação e infância</small></button>
+        <button type="button" data-group="luminosos" aria-pressed="false"><strong>Luminosos</strong><small>Vida pública de Jesus</small></button>
+        <button type="button" data-group="dolorosos" aria-pressed="false"><strong>Dolorosos</strong><small>Paixão e morte</small></button>
+        <button type="button" data-group="gloriosos" aria-pressed="false"><strong>Gloriosos</strong><small>Ressurreição e glória</small></button>
+      </div>
+    </div>
+    <p id="routeSummary" class="route-summary" aria-live="polite">5 mistérios · Gozosos</p>
+    <button type="button" id="startRosary" class="rosary-start">COMEÇAR A REZAR <span aria-hidden="true">→</span></button>
+  </section>
+
+  <section class="rosary-experience" id="rosaryExperience" aria-label="Acompanhamento do Rosário">
+    <div class="rosary-experience-header">
+      <div><p class="eyebrow blue">TERÇO INTERATIVO</p><h2 id="currentGroup">Mistérios Gozosos</h2></div>
+      <div class="rosary-progress-text" id="progressText" role="status" aria-live="polite">Escolha seu percurso para começar</div>
+    </div>
+    <div class="rosary-progress-track" role="progressbar" aria-label="Progresso da oração" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="rosaryProgress"><span id="rosaryProgressFill"></span></div>
+    <div class="rosary-layout">
+      <div class="rosary-map-panel">
+        <div class="rosary-map-top">
+          <strong>MAPA DAS 59 CONTAS</strong>
+          <div class="map-zoom" role="group" aria-label="Ampliação do mapa">
+            <button type="button" data-zoom="all">Geral</button>
+            <button type="button" data-zoom="mystery" aria-pressed="true">Mistério</button>
+            <button type="button" data-zoom="bead">Conta</button>
+          </div>
+        </div>
+        <svg id="rosaryMap" viewBox="0 0 700 760" role="img" aria-label="Mapa interativo do terço com 59 contas, crucifixo e medalha. A conta atual é destacada." preserveAspectRatio="xMidYMid meet">
+          <title>Mapa do Santo Terço</title>
+          <desc>São 50 contas pequenas e 5 grandes ao redor do círculo, mais 3 pequenas e 1 grande junto à cruz.</desc>
+        </svg>
+        <p class="map-tip" id="mapTip">Acompanhe a conta iluminada. Use os botões para aproximar ou ver o terço completo.</p>
+      </div>
+      <article class="rosary-prayer-panel" id="prayerPanel" aria-live="polite">
+        <p class="rosary-small-label" id="stepType">PREPARAÇÃO PARA ORAR</p>
+        <h3 id="stepTitle">Comece pelo sinal da Cruz</h3>
+        <p id="mysteryContext" class="mystery-context" hidden></p>
+        <div class="prayer-image" id="prayerImage" hidden><img id="prayerImageSrc" src="" alt=""></div>
+        <p class="prayer-words" id="stepWords">Em nome do Pai, do Filho e do Espírito Santo. Amém.</p>
+        <p class="prayer-reference" id="stepReference"></p>
+        <a class="illustrated-prayer-link" id="illustratedLink" href="ave-maria.html" target="_blank" rel="noopener noreferrer" hidden>VER ORAÇÃO ILUSTRADA ↗</a>
+        <div class="rosary-nav">
+          <button id="previousBead" type="button" disabled>← ANTERIOR</button>
+          <button id="concludeBead" type="button" class="rosary-main-nav">CONCLUÍ <span aria-hidden="true">→</span></button>
+        </div>
+        <button id="skipOptional" type="button" class="skip-optional" hidden>Não costumo rezar esta oração. Pular.</button>
+        <p class="rosary-assistive">A leitura do texto pode ser acompanhada pelo VLibras. A tradução automática não substitui a interpretação humana.</p>
+      </article>
+    </div>
+    <section class="rosary-finished" id="rosaryFinished" hidden aria-live="polite">
+      <span aria-hidden="true">✦</span>
+      <h2>Oração concluída</h2>
+      <p>Você percorreu os mistérios escolhidos. Pode começar novamente ou voltar às orações ilustradas.</p>
+      <button type="button" id="restartRosary">REZAR NOVAMENTE</button>
+      <a href="oracoes-ilustradas.html">VOLTAR ÀS ORAÇÕES</a>
+    </section>
+  </section>
+  <section class="rosary-explanation">
+    <h2>O que você está contemplando?</h2>
+    <p>Os mistérios acompanham a história de Jesus: sua vinda ao mundo, sua vida pública, sua Paixão e sua vitória sobre a morte. O desenho mostra o percurso do terço, enquanto as palavras orientam cada oração.</p>
+    <p><strong>Terço:</strong> cinco mistérios e 59 contas físicas. <strong>Rosário tradicional:</strong> quinze mistérios (Gozosos, Dolorosos e Gloriosos). <strong>Com os Luminosos:</strong> vinte mistérios. O mapa é percorrido novamente a cada grupo.</p>
+  </section>
+</main>
+<footer>
+  <strong>Oração Visual</strong>
+  <p>Um recurso de apoio à oração e à compreensão visual, desenvolvido especialmente para ampliar o acesso de pessoas surdas e não alfabetizadas à experiência da oração católica. Sua construção considera o Catecismo da Igreja Católica e contribuições da comunidade surda.</p>
+  <aside class="support-notice" aria-label="Aviso sobre os recursos de apoio"><strong>RECURSOS DE APOIO</strong><p>As imagens e o avatar em Libras favorecem a compreensão e a acessibilidade comunicacional. São recursos complementares e não substituem a mediação humana em Libras nem a formação e o acompanhamento catequético.</p></aside>
+  <p class="reference">Referências: CIC 971 · 966 · 2626–2643 · Rosarium Virginis Mariae</p>
+  <button class="install-app" id="installAppButton" type="button" hidden>INSTALAR APLICATIVO</button>
+  <p class="footer-rights">© 2026 Eduarda Bispo. Todos os direitos reservados.</p>
+  <p class="site-version" aria-label="Versão atual">Versão 1.4</p>
+  <a class="footer-brand" href="https://compassrosesystems.com.br/" target="_blank" rel="noopener noreferrer">Desenvolvido por Compass Rose Systems</a>
+</footer>
+<div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>if (window.VLibras) new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
+<script src="rosario.js?v=20261012-1" defer></script>
+<script src="pwa-install.js?v=20260918-1" defer></script>
+</body>
+</html>

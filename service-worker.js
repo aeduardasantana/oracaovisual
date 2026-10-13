@@ -1,4 +1,4 @@
-const CACHE='oracao-visual-v9';
+const CACHE='oracao-visual-v10';
 const FILES=[
   './',
   './index.html',
@@ -7,7 +7,7 @@ const FILES=[
   './pai-nosso.html',
   './rosario.html',
   './rosario.css?v=20261013-3',
-  './rosario.js?v=20261013-4',
+  './rosario.js?v=20261013-5',
   './styles.css?v=20260918-6',
   './oracoes-ilustradas.css?v=20261012-1',
   './app.js?v=20260917-2',

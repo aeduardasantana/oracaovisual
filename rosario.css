@@ -125,3 +125,7 @@ body.rosary-glory .rosary-experience::before{content:"";position:absolute;inset:
 body.rosary-glory .rosary-experience>*{position:relative;z-index:1}
 @keyframes rosary-heavenly-glow{0%,100%{opacity:.36}50%{opacity:1}}
 @media(prefers-reduced-motion:reduce){body.rosary-glory .rosary-experience::before{animation:none}}
+
+/* Ajustes de conclusão e alinhamento responsivo */
+.rosary-prayer-panel[hidden]{display:none}
+.rosary-start{grid-column:1/-1}

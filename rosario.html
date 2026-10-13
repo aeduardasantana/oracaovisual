@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20260918-6">
-  <link rel="stylesheet" href="rosario.css?v=20261012-2">
+  <link rel="stylesheet" href="rosario.css?v=20261013-1">
 </head>
 <body>
 <header class="topbar">
@@ -57,16 +57,22 @@
     <button type="button" id="startRosary" class="rosary-start">COMEÇAR A REZAR <span aria-hidden="true">→</span></button>
   </section>
 
-  <section class="rosary-experience" id="rosaryExperience" aria-label="Acompanhamento do Rosário">
+  <section class="rosary-experience" id="rosaryExperience" aria-label="Acompanhamento do Rosário" hidden>
     <div class="rosary-experience-header">
-      <div><p class="eyebrow blue">TERÇO INTERATIVO</p><h2 id="currentGroup">Mistérios Gozosos</h2></div>
+      <div><p class="eyebrow blue">ORAÇÃO EM ANDAMENTO</p><h2 id="currentGroup">Mistérios Gozosos</h2></div>
       <div class="rosary-progress-text" id="progressText" role="status" aria-live="polite">Escolha seu percurso para começar</div>
     </div>
     <div class="rosary-progress-track" role="progressbar" aria-label="Progresso da oração" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="rosaryProgress"><span id="rosaryProgressFill"></span></div>
-    <div class="rosary-layout">
-      <div class="rosary-map-panel">
+    <div class="rosary-compact-tracker" aria-label="Contas do mistério atual">
+      <div class="rosary-compact-head"><strong id="currentBeadLabel">Abertura da oração</strong><button id="openRosaryMap" type="button" aria-haspopup="dialog" aria-controls="rosaryMapDialog">VER TERÇO <span aria-hidden="true">↗</span></button></div>
+      <div id="miniBeads" class="rosary-mini-beads" aria-hidden="true"></div>
+    </div>
+    <dialog id="rosaryMapDialog" class="rosary-map-dialog" aria-label="Mapa completo das contas do terço">
+      <div class="rosary-map-panel" id="rosaryMapPanel">
         <div class="rosary-map-top">
-          <strong>MAPA DAS 59 CONTAS</strong>
+          <strong>CONTAS DO TERÇO</strong><button id="closeRosaryMap" class="rosary-map-close" type="button">FECHAR ✕</button>
+        </div>
+        <div class="rosary-map-zoom">
           <div class="map-zoom" role="group" aria-label="Ampliação do mapa">
             <button type="button" data-zoom="all">Geral</button>
             <button type="button" data-zoom="mystery" aria-pressed="true">Mistério</button>
@@ -77,26 +83,36 @@
           <title>Mapa do Santo Terço</title>
           <desc>São 50 contas pequenas e 5 grandes ao redor do círculo, mais 3 pequenas e 1 grande junto à cruz.</desc>
         </svg>
-        <p class="map-tip" id="mapTip">Acompanhe a conta iluminada. Use os botões para aproximar ou ver o terço completo.</p>
+        <p class="map-tip" id="mapTip">Toque em uma conta para continuar a partir dela. Feche o mapa para voltar à oração.</p>
       </div>
-      <article class="rosary-prayer-panel" id="prayerPanel" aria-live="polite">
-        <p class="rosary-small-label" id="stepType">PREPARAÇÃO PARA ORAR</p>
-        <h3 id="stepTitle">Comece pelo sinal da Cruz</h3>
-        <p id="mysteryContext" class="mystery-context" hidden></p>
-        <div id="prayerMotion" class="prayer-motion" role="img" aria-label="Representação simbólica da oração atual"></div>
-        <p id="motionDescription" class="motion-description"></p>
-        <div class="prayer-image" id="prayerImage" hidden><img id="prayerImageSrc" src="" alt=""><p id="frameCaption" class="rosary-image-caption"></p><div class="rosary-image-controls"><button id="framePrev" type="button" aria-label="Imagem anterior da oração">←</button><span id="frameCounter">1 de 10</span><button id="frameNext" type="button" aria-label="Próxima imagem da oração">→</button></div></div>
-        <p class="prayer-words" id="stepWords">Em nome do Pai, do Filho e do Espírito Santo. Amém.</p>
-        <p class="prayer-reference" id="stepReference"></p>
-        <a class="illustrated-prayer-link" id="illustratedLink" href="ave-maria.html" target="_blank" rel="noopener noreferrer" hidden>VER ORAÇÃO ILUSTRADA ↗</a>
-        <div class="rosary-nav">
-          <button id="previousBead" type="button" disabled>← ANTERIOR</button>
-          <button id="concludeBead" type="button" class="rosary-main-nav">CONCLUÍ <span aria-hidden="true">→</span></button>
+    </dialog>
+    <article class="rosary-prayer-panel" id="prayerPanel" aria-live="polite">
+      <p class="rosary-small-label" id="stepType">PREPARAÇÃO PARA ORAR</p>
+      <h3 id="stepTitle">Comece pelo sinal da Cruz</h3>
+      <p id="mysteryContext" class="mystery-context" hidden></p>
+      <p class="prayer-words" id="stepWords">Em nome do Pai, do Filho e do Espírito Santo. Amém.</p>
+      <p class="prayer-reference" id="stepReference"></p>
+      <details id="illustratedDetails" class="rosary-illustrated-details" hidden>
+        <summary id="illustratedSummary">VER ORAÇÃO EM IMAGENS</summary>
+        <div class="prayer-image" id="prayerImage" hidden>
+          <img id="prayerImageSrc" src="" alt="">
+          <p id="frameCaption" class="rosary-image-caption"></p>
+          <div class="rosary-image-controls">
+            <button id="framePrev" type="button" aria-label="Imagem anterior da oração">←</button>
+            <span id="frameCounter">1 de 10</span>
+            <button id="frameNext" type="button" aria-label="Próxima imagem da oração">→</button>
+          </div>
         </div>
-        <button id="skipOptional" type="button" class="skip-optional" hidden>Não costumo rezar esta oração. Pular.</button>
-        <p class="rosary-assistive">A leitura do texto pode ser acompanhada pelo VLibras. A tradução automática não substitui a interpretação humana.</p>
-      </article>
-    </div>
+      </details>
+      <a class="illustrated-prayer-link" id="illustratedLink" href="ave-maria.html" target="_blank" rel="noopener noreferrer" hidden>VER ORAÇÃO ILUSTRADA ↗</a>
+      <button id="replayRosaryMotion" type="button" class="replay-rosary-motion">↻ REVER ANIMAÇÃO</button>
+      <button id="skipOptional" type="button" class="skip-optional" hidden>Não costumo rezar esta oração. Pular.</button>
+      <p class="rosary-assistive">O texto pode ser acompanhado com VLibras. A tradução automática não substitui a interpretação humana.</p>
+    </article>
+    <nav class="rosary-nav" id="rosaryNav" aria-label="Avançar na oração">
+      <button id="previousBead" type="button" disabled>← ANTERIOR</button>
+      <button id="concludeBead" type="button" class="rosary-main-nav">CONCLUÍ <span aria-hidden="true">→</span></button>
+    </nav>
     <section class="rosary-finished" id="rosaryFinished" hidden aria-live="polite">
       <span aria-hidden="true">✦</span>
       <h2>Oração concluída</h2>
@@ -111,6 +127,7 @@
     <p><strong>Terço:</strong> cinco mistérios e 59 contas físicas. <strong>Rosário tradicional:</strong> quinze mistérios, com Gozosos, Dolorosos e Gloriosos e 150 Ave-Marias nas dezenas. O mapa é percorrido novamente a cada grupo. A sugestão diária segue a distribuição tradicional associada à espiritualidade de São Luís Maria Grignion de Montfort: segunda e quinta, Gozosos; terça e sexta, Dolorosos; quarta, sábado e domingo, Gloriosos.</p>
   </section>
 </main>
+<div id="rosaryScreenEffect" class="rosary-screen-effect" hidden aria-hidden="true"></div>
 <footer>
   <strong>Oração Visual</strong>
   <p>Um recurso de apoio à oração e à compreensão visual, desenvolvido especialmente para ampliar o acesso de pessoas surdas e não alfabetizadas à experiência da oração católica. Sua construção considera o Catecismo da Igreja Católica e contribuições da comunidade surda.</p>
@@ -118,13 +135,13 @@
   <p class="reference">Referências: CIC 971 · 966 · 2626–2643 · São Luís Maria Grignion de Montfort, O Segredo Admirável do Santíssimo Rosário</p>
   <button class="install-app" id="installAppButton" type="button" hidden>INSTALAR APLICATIVO</button>
   <p class="footer-rights">© 2026 Eduarda Bispo. Todos os direitos reservados.</p>
-  <p class="site-version" aria-label="Versão atual">Versão 1.5</p>
+  <p class="site-version" aria-label="Versão atual">Versão 1.6</p>
   <a class="footer-brand" href="https://compassrosesystems.com.br/" target="_blank" rel="noopener noreferrer">Desenvolvido por Compass Rose Systems</a>
 </footer>
 <div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
 <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 <script>if (window.VLibras) new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
-<script src="rosario.js?v=20261012-2" defer></script>
+<script src="rosario.js?v=20261013-1" defer></script>
 <script src="pwa-install.js?v=20260918-1" defer></script>
 </body>
 </html>

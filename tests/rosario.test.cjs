@@ -31,10 +31,12 @@ assert.ok(points[55].y>points[56].y && points[56].y>points[57].y && points[57].y
   "A haste progride de baixo para cima, da cruz em direção à medalha");
 assert.ok(points[55].y<741 && points[58].y>569,
   "Contas entre a cruz e a medalha central");
-assert.ok(points[0].x<350 && points[54].x>350 && points[0].y>515 && points[54].y>515,
-  "O aro começa próximo da medalha no lado esquerdo e termina no lado direito");
+assert.ok(points[0].x>350 && points[54].x<350 && points[0].y>515 && points[54].y>515,
+  "O aro começa no lado direito da medalha e termina no lado esquerdo");
 assert.ok(points[11].y<points[0].y && points[44].y<points[54].y,
-  "O aro sobe pela esquerda antes de retornar pela direita");
+  "O aro sobe pelo lado direito e desce pelo lado esquerdo");
+assert.ok(points[11].x>350 && points[44].x<350,
+  "A primeira dezena percorre a direita; a última percorre a esquerda");
 assert.ok(source.includes('marker:"medal"') && source.includes('id:"rosaryMedal"'),
   "O Glória chega à medalha central");
 assert.ok(source.includes('M350 569 L') && !source.includes('join(" ")+" Z"'),

@@ -322,11 +322,13 @@ function renderMiniBeads(){
     for(let k=0;k<=10;k++){
       make((k===0?"large ":"")+(k<n?"done ":k===n?"current ":""));
     }
-  } else if(step.bead!==null && step.bead>=55){
-    const n=step.bead-55;
-    label.textContent="ORAÇÕES INICIAIS · "+(step.type==="gloria"?"GLÓRIA":step.type==="pai"?"PAI-NOSSO":"AVE-MARIA "+n+" DE 3");
+  } else if(step.marker==="medal" || (step.bead!==null && step.bead>=55)){
+    const isMedal=step.marker==="medal";
+    const n=isMedal?4:step.bead-55;
+    label.textContent=isMedal?"MEDALHA CENTRAL · GLÓRIA AO PAI":step.type==="pai"?"DA CRUZ PARA CIMA · PAI-NOSSO":"DA CRUZ PARA CIMA · AVE-MARIA "+n+" DE 3";
     make("cross","✝");
     for(let k=0;k<4;k++)make((k===0?"large ":"")+(k<n?"done ":k===n?"current ":""));
+    make("medal "+(isMedal?"current":""),"M");
   }else{
     label.textContent=step.type==="cruz"?"SINAL DA CRUZ":step.type==="oferecimento"?"OFERECIMENTO":step.type==="credo"?"CREDO":"ORAÇÕES FINAIS";
     make("cross current","✝");

@@ -131,24 +131,32 @@ try {
   if(savedMotion!==null)animationsEnabled = savedMotion==="true";
 } catch (_) {}
 $("motionEnabled").checked=animationsEnabled;
+let effectTimeout=null;
 function updateMotion(step) {
-  const kind = Object.hasOwn(MOTION_VISUALS,step.type) ? step.type :
+  const overlay=$("rosaryScreenEffect");
+  window.clearTimeout(effectTimeout);
+  overlay.hidden=true;
+  overlay.replaceChildren();
+  const reduceMotion=window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(!animationsEnabled || reduceMotion || !started || finished)return;
+  const kind=Object.hasOwn(MOTION_VISUALS,step.type) ? step.type :
     step.type==="jaculatoria" || step.type==="ladainha" ? "ave" :
-    step.type==="agradecimento" ? "oferecimento" :
-    step.type==="oremos" ? "default" : "default";
+    step.type==="agradecimento" ? "oferecimento" : "default";
   const motion=MOTION_VISUALS[kind];
-  const stage=$("prayerMotion");
-  stage.setAttribute("aria-label",motion.label);
-  stage.className="prayer-motion scene-"+kind+(animationsEnabled?" is-animated":"");
-  stage.innerHTML='<svg viewBox="0 0 300 185" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">'+motion.art+'</svg>';
-  $("motionDescription").textContent=motion.label;
-  document.body.classList.toggle("rosary-glory",animationsEnabled && step.type==="gloria");
+  overlay.className="rosary-screen-effect effect-"+kind;
+  // A cena só existe enquanto o gesto acontece. Não é um painel ilustrado.
+  overlay.innerHTML='<svg viewBox="0 0 300 185" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">'+motion.art+'</svg>';
+  overlay.hidden=false;
+  effectTimeout=window.setTimeout(()=>{
+    overlay.hidden=true;
+    overlay.replaceChildren();
+  },kind==="gloria"?3200:2700);
 }
 $("motionEnabled").addEventListener("change",event=>{
   animationsEnabled=Boolean(event.target.checked);
   try{localStorage.setItem(motionKey,String(animationsEnabled))}catch(_){}
-  if(started)updateMotion(steps[index]);
-  else updateMotion({type:"cruz"});
+  if(started && !finished)updateMotion(steps[index]);
+  else {const e=$("rosaryScreenEffect");e.hidden=true;e.replaceChildren();}
 });
 
 function beadPoint(i) {
@@ -233,6 +241,8 @@ function gotoBead(bead){
   else stepIndex=steps.findIndex(s=>s.bead===bead && (bead>=55 || s.position===position) && (s.type==="pai"||s.type==="ave"));
   if(stepIndex<0)return;
   index=stepIndex;finished=false;currentFrame=0;render();save();
+  closeRosaryMap();
+  scrollToCurrentPrayer();
 }
 function currentPoint(){
   const s=steps[index] || {};
@@ -283,13 +293,74 @@ function updateMap(){
   }
   updateZoom();
 }
+
+function renderMiniBeads(){
+  const step=steps[index]||{};
+  const box=$("miniBeads");
+  const label=$("currentBeadLabel");
+  box.replaceChildren();
+  const make=(cls,text="")=>{
+    const el=document.createElement("span");
+    el.className=cls;el.textContent=text;box.appendChild(el);
+  };
+  if(typeof step.mystery==="number"){
+    const n=step.bead==null?0:step.bead%11;
+    label.textContent=(step.mystery+1)+"º MISTÉRIO · "+(step.type==="ave"?"AVE-MARIA "+n+" DE 10":step.type==="pai"?"PAI-NOSSO":step.type==="misterio"?"CONTEMPLAÇÃO":step.type==="gloria"?"GLÓRIA":"JACULATÓRIA");
+    for(let k=0;k<=10;k++){
+      make((k===0?"large ":"")+(k<n?"done ":k===n?"current ":""));
+    }
+  } else if(step.bead!==null && step.bead>=55){
+    const n=step.bead-55;
+    label.textContent="ORAÇÕES INICIAIS · "+(step.type==="gloria"?"GLÓRIA":step.type==="pai"?"PAI-NOSSO":"AVE-MARIA "+n+" DE 3");
+    make("cross","✝");
+    for(let k=0;k<4;k++)make((k===0?"large ":"")+(k<n?"done ":k===n?"current ":""));
+  }else{
+    label.textContent=step.type==="cruz"?"SINAL DA CRUZ":step.type==="oferecimento"?"OFERECIMENTO":step.type==="credo"?"CREDO":"ORAÇÕES FINAIS";
+    make("cross current","✝");
+  }
+}
+function showRosaryMap(){
+  const dialog=$("rosaryMapDialog");
+  if(typeof dialog.showModal==="function"){dialog.showModal();return;}
+  dialog.setAttribute("open","");
+}
+function closeRosaryMap(){
+  const dialog=$("rosaryMapDialog");
+  if(typeof dialog.close==="function" && dialog.open){dialog.close();return;}
+  dialog.removeAttribute("open");
+}
+$("openRosaryMap").addEventListener("click",showRosaryMap);
+$("closeRosaryMap").addEventListener("click",closeRosaryMap);
+$("rosaryMapDialog").addEventListener("click",event=>{
+  if(event.target===$("rosaryMapDialog"))closeRosaryMap();
+});
+$("replayRosaryMotion").addEventListener("click",()=>{if(started && !finished)updateMotion(steps[index]);});
+function scrollToCurrentPrayer(){
+  if(!started || finished)return;
+  const target=$("rosaryExperience");
+  target.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function refreshMobileNavigation(){
+  if(!started || finished || $("rosaryExperience").hidden){
+    document.body.classList.remove("rosary-nav-visible");return;
+  }
+  const rect=$("rosaryExperience").getBoundingClientRect();
+  const isVisible=rect.top < window.innerHeight-70 && rect.bottom > 105;
+  document.body.classList.toggle("rosary-nav-visible",isVisible);
+}
+window.addEventListener("scroll",refreshMobileNavigation,{passive:true});
+window.addEventListener("resize",refreshMobileNavigation);
+
 function frameUpdate(){
   const step=steps[index]||{};
   const isImage=step.type==="pai"||step.type==="ave";
   $("prayerImage").hidden=!isImage;
+  $("illustratedDetails").hidden=!isImage;
+  if(!isImage)$("illustratedDetails").open=false;
   $("illustratedLink").hidden=!isImage;
   if(!isImage)return;
   const captions=IMAGE_CAPTIONS[step.type];
+  $("illustratedSummary").textContent="VER "+(step.type==="pai"?"PAI-NOSSO":"AVE-MARIA")+" EM IMAGENS ("+captions.length+")";
   currentFrame=Math.min(Math.max(0,currentFrame),captions.length-1);
   const folder=step.type==="pai"?"pai-nosso":"ave-maria";
   $("prayerImageSrc").src="assets/oracoes-ilustradas/"+folder+"/"+String(currentFrame+1).padStart(2,"0")+".webp";
@@ -328,9 +399,12 @@ function render(){
   $("progressText").textContent="Etapa "+(index+1)+" de "+steps.length+" · "+stepDesc;
   $("rosaryFinished").hidden=!finished;
   $("prayerPanel").hidden=finished;
+  $("rosaryNav").hidden=finished;
+  renderMiniBeads();
   updateMap();
   frameUpdate();
   updateMotion(s);
+  refreshMobileNavigation();
 }
 function save(){
   try{localStorage.setItem(cacheKey,JSON.stringify({date:dayKey,mode:selectedMode,group:selectedGroup,index,started,finished,zoom}));}catch(_){}
@@ -340,8 +414,10 @@ function start(){
   selectedGroup=selectedMode==="tradicional"?"gozosos":(selectedMode==="dia"?todayGroup:selectedGroup);
   buildSteps();
   started=true;finished=false;index=0;currentFrame=0;
+  $("rosaryExperience").hidden=false;
   render();save();
-  $("rosaryExperience").scrollIntoView({behavior:"smooth",block:"start"});
+  scrollToCurrentPrayer();
+  refreshMobileNavigation();
 }
 function changeMode(){
   selectedMode=$("rosaryMode").value;
@@ -362,24 +438,23 @@ $("rosaryMode").addEventListener("change",changeMode);
 document.querySelectorAll("[data-group]").forEach(b=>b.addEventListener("click",()=>selectGroup(b.dataset.group)));
 document.querySelectorAll("[data-zoom]").forEach(b=>b.addEventListener("click",()=>{zoom=b.dataset.zoom;updateZoom();save();}));
 $("startRosary").addEventListener("click",start);
-$("previousBead").addEventListener("click",()=>{if(index===0)return;index--;finished=false;currentFrame=0;render();save();});
+$("previousBead").addEventListener("click",()=>{if(index===0)return;index--;finished=false;currentFrame=0;render();save();scrollToCurrentPrayer();});
 $("concludeBead").addEventListener("click",()=>{
   if(!started)return;
   if(index>=steps.length-1){finished=true;render();save();$("rosaryFinished").scrollIntoView({behavior:"smooth",block:"center"});return;}
-  index++;currentFrame=0;render();save();
+  index++;currentFrame=0;render();save();scrollToCurrentPrayer();
 });
-$("skipOptional").addEventListener("click",()=>{if(!steps[index]?.optional)return;index++;currentFrame=0;render();save()});
+$("skipOptional").addEventListener("click",()=>{if(!steps[index]?.optional)return;index++;currentFrame=0;render();save();scrollToCurrentPrayer()});
 $("framePrev").addEventListener("click",()=>{currentFrame--;frameUpdate()});
 $("frameNext").addEventListener("click",()=>{currentFrame++;frameUpdate()});
 $("restartRosary").addEventListener("click",start);
 buildMap();
-updateMotion({type:"cruz"});
 if(restore?.started){
   selectedMode=restore.mode==="terco"?"escolhido":restore.mode;selectedGroup=restore.group;$("rosaryMode").value=selectedMode;
   selectGroup(selectedGroup);changeMode();buildSteps();
   index=Math.min(Math.max(0,Number(restore.index)||0),steps.length-1);
   zoom=["all","mystery","bead"].includes(restore.zoom)?restore.zoom:"mystery";
-  started=true;finished=Boolean(restore.finished);render();
+  started=true;finished=Boolean(restore.finished);$("rosaryExperience").hidden=false;render();
   $("startRosary").textContent="RECOMEÇAR COM ESTE PERCURSO →";
 } else {
   selectGroup(selectedGroup);

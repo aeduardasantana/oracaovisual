@@ -223,3 +223,7 @@ body.rosary-glory .rosary-experience>*{position:relative;z-index:1}
   .rosary-screen-effect, .rosary-screen-effect *, .rosary-screen-effect::before{animation:none!important;transition:none!important}
   .rosary-screen-effect{display:none!important}
 }
+
+/* Respeitar o estado de conclusão e a escolha por mostrar imagens. */
+.rosary-nav[hidden],.rosary-prayer-panel[hidden],.rosary-illustrated-details[hidden]{display:none!important}
+.rosary-screen-effect .scene-book-page{animation:effect-father 2.5s ease-in-out;transform-origin:center;transform-box:fill-box}

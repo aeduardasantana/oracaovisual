@@ -227,3 +227,8 @@ body.rosary-glory .rosary-experience>*{position:relative;z-index:1}
 /* Respeitar o estado de conclusão e a escolha por mostrar imagens. */
 .rosary-nav[hidden],.rosary-prayer-panel[hidden],.rosary-illustrated-details[hidden]{display:none!important}
 .rosary-screen-effect .scene-book-page{animation:effect-father 2.5s ease-in-out;transform-origin:center;transform-box:fill-box}
+
+/* A barra de ação permanece à mão, inclusive quando o navegador solicita versão desktop. */
+.rosary-experience{padding-bottom:120px}
+body.rosary-nav-visible .rosary-nav{position:fixed;left:0;right:0;bottom:0;max-width:700px;padding:12px 14px max(12px,env(safe-area-inset-bottom));box-shadow:0 -6px 28px rgba(19,42,61,.12);background:#fff;border-top:1px solid #e2ddd3;z-index:45}
+@media(max-width:850px){.rosary-progress-track{display:none}}

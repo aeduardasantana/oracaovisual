@@ -57,6 +57,51 @@ const IMAGE_CAPTIONS = {
   ave: ["Ave Maria,","cheia de graça,","o Senhor é convosco.","Bendita sois vós entre as mulheres,","e bendito é o fruto do vosso ventre, Jesus.","Santa Maria, Mãe de Deus,","rogai por nós, pecadores,","agora","e na hora de nossa morte.","Amém."],
   pai: ["Pai nosso, que estais nos céus,","santificado seja o vosso Nome;","venha a nós o vosso Reino;","seja feita a vossa vontade,","assim na terra como no céu.","O pão nosso de cada dia nos dai hoje;","perdoai-nos as nossas ofensas,","assim como nós perdoamos a quem nos tem ofendido;","e não nos deixeis cair em tentação,","mas livrai-nos do Mal.","Amém."]
 };
+
+/* Representações simbólicas — desenhadas em SVG, sem dependências externas. */
+const MOTION_VISUALS = {
+  cruz: {
+    label:"Cruz iluminada: início e encerramento da oração.",
+    art:'<circle cx="150" cy="93" r="79" class="halo scene-halo"/><circle cx="150" cy="93" r="62" class="halo scene-halo"/><path class="sunray scene-ray" d="M150 6 v19 M150 162 v16 M57 92 H73 M228 92 H245 M82 26 l12 13 M207 148 l13 13 M82 159 l12-13 M205 40 l14-14"/><g class="scene-cross"><path d="M140 26 h20 v54 h43 v19 h-43 v72 h-20 V99 H97 V80 h43 z" class="cross-icon"/><path d="M150 43 V155" stroke="#c69545" stroke-width="2"/></g>'
+  },
+  credo: {
+    label:"Cruz da profissão de fé; luz suave envolvendo o crucifixo.",
+    art:'<circle cx="150" cy="93" r="78" class="halo scene-halo"/><circle cx="150" cy="93" r="59" class="halo scene-halo"/><path class="sunray scene-ray" d="M150 7 v18 M150 164 v15 M66 93 h20 M215 93 h20 M88 35 l14 15 M195 136 l14 15"/><g class="scene-cross"><path d="M140 27 h20 v54 h42 v20 h-42 v69 h-20 v-69 H98 V81 h42 z" class="cross-icon"/><path d="M145 33 h10" stroke="#dcb875" stroke-width="2"/></g>'
+  },
+  gloria: {
+    label:"Três círculos luminosos e raios suaves simbolizam o louvor à Santíssima Trindade.",
+    art:'<circle cx="150" cy="94" r="83" class="halo scene-halo"/><circle cx="150" cy="94" r="60" class="halo scene-halo"/><g class="scene-light"><circle cx="150" cy="66" r="25" fill="#eed498" opacity=".75"/><circle cx="113" cy="124" r="25" fill="#f1e4c2" opacity=".75"/><circle cx="187" cy="124" r="25" fill="#b7d1db" opacity=".65"/></g><path d="M150 66 L113 124 L187 124 Z" fill="none" stroke="#c39a53" stroke-width="3" opacity=".7"/><g class="scene-ray"><path class="sunray" d="M150 5 v19 M150 169 v13 M59 95 h19 M222 95 h20 M86 29 l14 16 M202 146 l12 14 M86 156 l14-16 M203 42 l13-13"/></g>'
+  },
+  pai: {
+    label:"Família voltada para a luz celeste, em oração ao Pai.",
+    art:'<g class="scene-light"><path d="M129 8 L102 98 H198 L171 8 Z" fill="#edd39a" opacity=".46"/><circle cx="150" cy="20" r="20" class="light"/></g><g class="scene-praying"><circle cx="92" cy="91" r="17" class="silhouette"/><path d="M62 160 Q64 115 92 114 Q122 115 127 160 Z" class="silhouette"/><path d="M108 116 L135 95" class="line-art"/><circle cx="207" cy="91" r="17" class="silhouette"/><path d="M175 160 Q177 115 207 114 Q235 115 239 160 Z" class="silhouette"/><path d="M188 116 L164 95" class="line-art"/><circle cx="151" cy="117" r="13" class="silhouette"/><path d="M132 166 Q133 134 150 133 Q168 134 169 166 Z" class="silhouette"/><path d="M143 137 L150 125 L157 137" class="line-art"/></g>'
+  },
+  ave: {
+    label:"Silhueta de Nossa Senhora do Rosário, com manto e terço nas mãos.",
+    art:'<circle cx="150" cy="71" r="54" class="halo scene-halo"/><g class="scene-mantle"><path d="M150 30 Q113 33 109 98 L78 165 Q147 183 223 165 L193 98 Q190 33 150 30 Z" fill="#517797"/><path d="M151 47 Q131 49 128 71 Q128 95 151 99 Q173 94 174 71 Q172 50 151 47 Z" fill="#efd4ad"/><path d="M115 106 Q149 128 185 106 L199 167 Q149 181 99 167 Z" fill="#f0e7d2"/><path d="M136 113 L150 130 L164 113" class="line-art" style="stroke-width:4"/><path class="rosary-chain" d="M154 128 C205 125 205 166 171 168 C151 167 161 149 181 145"/><circle cx="184" cy="139" r="3" class="rosary-bead-mini"/><circle cx="193" cy="148" r="3" class="rosary-bead-mini"/><circle cx="190" cy="157" r="3" class="rosary-bead-mini"/><circle cx="182" cy="165" r="3" class="rosary-bead-mini"/><path d="M173 165 v12 M167 171 h12" class="rosary-chain"/></g>'
+  },
+  fatima: {
+    label:"Pessoa inclinando a cabeça e levando a mão ao peito em gesto de arrependimento.",
+    art:'<circle cx="150" cy="91" r="72" class="halo scene-halo"/><g><g class="scene-head-bow"><circle cx="148" cy="51" r="20" class="silhouette"/></g><path d="M128 78 Q153 70 171 90 L185 150 L112 150 Z" class="silhouette"/><path class="scene-heart-hand" d="M178 100 Q157 115 151 122 L140 118" class="line-art"/><path d="M140 123 C135 118 129 125 140 135 C151 125 144 118 140 123 Z" class="heart"/><path d="M121 146 Q102 161 95 177 M174 145 Q195 160 199 177" class="line-art"/></g>'
+  },
+  misterio:{
+    label:"Bíblia aberta, com luz sobre as páginas para a contemplação do mistério.",
+    art:'<circle cx="150" cy="73" r="59" class="halo scene-halo"/><g class="scene-book-page"><path d="M150 65 Q109 48 62 65 V149 Q108 132 150 150 Z" fill="#faf2df" stroke="#a88b60" stroke-width="3"/><path d="M150 65 Q190 48 238 65 V149 Q193 132 150 150 Z" fill="#fff8e9" stroke="#a88b60" stroke-width="3"/><path d="M150 65 V150 M85 90 l46 2 M85 106 l46 2 M168 91 l47-3 M168 107 l47-3" stroke="#b7a98e" stroke-width="3"/></g><path d="M150 25 V42" class="sunray scene-ray"/>'
+  },
+  oferecimento:{
+    label:"Mãos abertas em oferecimento, sob uma luz serena.",
+    art:'<circle cx="150" cy="55" r="52" class="halo scene-halo"/><g class="scene-light"><circle cx="150" cy="52" r="25" fill="#e9cc8c"/></g><path d="M43 146 Q89 107 135 140 L150 150 L165 140 Q211 107 257 146" fill="none" stroke="#345978" stroke-width="17" stroke-linecap="round"/><path d="M70 132 Q111 89 148 133 M230 132 Q187 89 152 133" fill="none" stroke="#bc9463" stroke-width="10" stroke-linecap="round"/>'
+  },
+  salve:{
+    label:"Nossa Senhora acolhedora, com o manto aberto em gesto de proteção.",
+    art:'<circle cx="150" cy="61" r="49" class="halo scene-halo"/><g class="scene-mantle"><path d="M150 22 Q111 27 108 86 L54 166 Q149 190 246 166 L192 86 Q189 27 150 22 Z" fill="#456c8d"/><path d="M150 40 Q130 43 128 68 Q129 91 150 94 Q171 90 172 68 Q170 43 150 40 Z" fill="#e6c79f"/><path d="M122 104 Q150 127 178 104 L196 172 H104 Z" fill="#f1e6d0"/><path d="M111 110 L79 142 M188 110 L220 142" class="line-art" style="stroke-width:5"/></g>'
+  },
+  default: {
+    label:"Luz serena e recolhimento durante a oração.",
+    art:'<circle cx="150" cy="93" r="72" class="halo scene-halo"/><circle cx="150" cy="93" r="42" class="light scene-light"/><path d="M112 153 Q150 125 188 153" fill="none" stroke="#345978" stroke-width="10" stroke-linecap="round"/>'
+  }
+};
+
 const $ = id => document.getElementById(id);
 const status = $("progressText");
 const svg = $("rosaryMap");
@@ -68,15 +113,43 @@ const DAY_MAP = {mon:"gozosos",tue:"dolorosos",wed:"gloriosos",thu:"gozosos",fri
 const DAY_NAMES = {mon:"segunda-feira",tue:"terça-feira",wed:"quarta-feira",thu:"quinta-feira",fri:"sexta-feira",sat:"sábado",sun:"domingo"};
 const todayGroup = DAY_MAP[todayCode] || "gozosos";
 let selectedGroup = todayGroup;
-let selectedMode = "terco";
+let selectedMode = "dia";
 let steps = [], index = 0, started = false, finished = false, currentFrame = 0, zoom = "mystery";
 let points = [];
 let restore = null;
 try {
   const stored = JSON.parse(localStorage.getItem(cacheKey) || "null");
-  if(stored && stored.date === dayKey && ["terco","tradicional"].includes(stored.mode)
+  if(stored && stored.date === dayKey && ["dia","escolhido","tradicional","terco"].includes(stored.mode)
     && Object.hasOwn(ROSARY_GROUPS,stored.group)) restore = stored;
 } catch (_) { /* sem armazenamento disponível: continuar normalmente */ }
+
+
+const motionKey = "oracao-visual-animacoes-v1";
+let animationsEnabled = !(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+try {
+  const savedMotion = localStorage.getItem(motionKey);
+  if(savedMotion!==null)animationsEnabled = savedMotion==="true";
+} catch (_) {}
+$("motionEnabled").checked=animationsEnabled;
+function updateMotion(step) {
+  const kind = Object.hasOwn(MOTION_VISUALS,step.type) ? step.type :
+    step.type==="jaculatoria" || step.type==="ladainha" ? "ave" :
+    step.type==="agradecimento" ? "oferecimento" :
+    step.type==="oremos" ? "default" : "default";
+  const motion=MOTION_VISUALS[kind];
+  const stage=$("prayerMotion");
+  stage.setAttribute("aria-label",motion.label);
+  stage.className="prayer-motion scene-"+kind+(animationsEnabled?" is-animated":"");
+  stage.innerHTML='<svg viewBox="0 0 300 185" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">'+motion.art+'</svg>';
+  $("motionDescription").textContent=motion.label;
+  document.body.classList.toggle("rosary-glory",animationsEnabled && step.type==="gloria");
+}
+$("motionEnabled").addEventListener("change",event=>{
+  animationsEnabled=Boolean(event.target.checked);
+  try{localStorage.setItem(motionKey,String(animationsEnabled))}catch(_){}
+  if(started)updateMotion(steps[index]);
+  else updateMotion({type:"cruz"});
+});
 
 function beadPoint(i) {
   if(i < 55) {
@@ -236,7 +309,7 @@ function render(){
   if(!started){$("currentGroup").textContent="Mistérios "+ROSARY_GROUPS[selectedGroup].label;$("progressText").textContent="Escolha seu percurso para começar";return}
   const s=steps[index],m=currentMystery(s);
   const group=s.group?ROSARY_GROUPS[s.group].label:null;
-  $("currentGroup").textContent=group?"Mistérios "+group:(selectedMode==="tradicional"?"Rosário tradicional":"Santo Terço");
+  $("currentGroup").textContent=group?"Mistérios "+group:(selectedMode==="tradicional"?"Rosário completo":selectedMode==="dia"?"Terço do dia":"Terço escolhido");
   $("stepTitle").textContent=s.title;
   $("stepType").textContent=s.type==="misterio"?"MEDITAÇÃO DO MISTÉRIO":s.type==="oferecimento"?"INTENÇÕES E OFERECIMENTO":s.type==="salve"?"ORAÇÃO A NOSSA SENHORA":s.type==="cruz"?"SINAL DA CRUZ":s.type==="agradecimento"?"AGRADECIMENTO":s.type==="oremos"?"ORAÇÃO FINAL":s.type==="ladainha"?"LADAINHA DE NOSSA SENHORA":s.type==="credo"?"PROFISSÃO DE FÉ":s.type==="fatima"||s.type==="jaculatoria"?"JACULATÓRIA":s.type==="gloria"?"LOUVOR À SANTÍSSIMA TRINDADE":"ORAÇÃO DA CONTA ATUAL";
   $("mysteryContext").hidden=!(s.type==="misterio"||s.context);
@@ -257,13 +330,14 @@ function render(){
   $("prayerPanel").hidden=finished;
   updateMap();
   frameUpdate();
+  updateMotion(s);
 }
 function save(){
   try{localStorage.setItem(cacheKey,JSON.stringify({date:dayKey,mode:selectedMode,group:selectedGroup,index,started,finished,zoom}));}catch(_){}
 }
 function start(){
   selectedMode=$("rosaryMode").value;
-  selectedGroup=selectedMode==="tradicional"?"gozosos":selectedGroup;
+  selectedGroup=selectedMode==="tradicional"?"gozosos":(selectedMode==="dia"?todayGroup:selectedGroup);
   buildSteps();
   started=true;finished=false;index=0;currentFrame=0;
   render();save();
@@ -271,8 +345,10 @@ function start(){
 }
 function changeMode(){
   selectedMode=$("rosaryMode").value;
-  $("mysteryPicker").hidden=selectedMode!=="terco";
-  $("routeSummary").textContent=selectedMode==="tradicional"?"15 mistérios · 3 grupos · 150 Ave-Marias nas dezenas":"5 mistérios · "+ROSARY_GROUPS[selectedGroup].label;
+  $("mysteryPicker").hidden=selectedMode!=="escolhido";
+  if(selectedMode==="dia")selectedGroup=todayGroup;
+  document.querySelectorAll("[data-group]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.group===selectedGroup)));
+  $("routeSummary").textContent=selectedMode==="tradicional"?"Rosário completo · 15 mistérios · 150 Ave-Marias nas dezenas":selectedMode==="dia"?"Terço do dia · 5 mistérios "+ROSARY_GROUPS[todayGroup].label:"Terço escolhido · 5 mistérios "+ROSARY_GROUPS[selectedGroup].label;
   $("startRosary").textContent=started?"RECOMEÇAR COM ESTE PERCURSO →":"COMEÇAR A REZAR →";
 }
 function selectGroup(group){
@@ -281,7 +357,7 @@ function selectGroup(group){
   document.querySelectorAll("[data-group]").forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.group===group)));
   changeMode();
 }
-$("mysteryOfDay").textContent="HOJE, "+DAY_NAMES[todayCode].toUpperCase()+" · MISTÉRIOS "+ROSARY_GROUPS[todayGroup].label.toUpperCase();
+$("mysteryOfDay").textContent="HOJE, "+DAY_NAMES[todayCode].toUpperCase()+" · MISTÉRIOS "+ROSARY_GROUPS[todayGroup].label.toUpperCase()+" · SUGESTÃO TRADICIONAL DE SÃO LUÍS DE MONTFORT";
 $("rosaryMode").addEventListener("change",changeMode);
 document.querySelectorAll("[data-group]").forEach(b=>b.addEventListener("click",()=>selectGroup(b.dataset.group)));
 document.querySelectorAll("[data-zoom]").forEach(b=>b.addEventListener("click",()=>{zoom=b.dataset.zoom;updateZoom();save();}));
@@ -297,8 +373,9 @@ $("framePrev").addEventListener("click",()=>{currentFrame--;frameUpdate()});
 $("frameNext").addEventListener("click",()=>{currentFrame++;frameUpdate()});
 $("restartRosary").addEventListener("click",start);
 buildMap();
+updateMotion({type:"cruz"});
 if(restore?.started){
-  selectedMode=restore.mode;selectedGroup=restore.group;$("rosaryMode").value=selectedMode;
+  selectedMode=restore.mode==="terco"?"escolhido":restore.mode;selectedGroup=restore.group;$("rosaryMode").value=selectedMode;
   selectGroup(selectedGroup);changeMode();buildSteps();
   index=Math.min(Math.max(0,Number(restore.index)||0),steps.length-1);
   zoom=["all","mystery","bead"].includes(restore.zoom)?restore.zoom:"mystery";

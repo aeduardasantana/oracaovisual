@@ -53,6 +53,10 @@ assert.equal(daily.filter(s=>s.type==="ave").length,53,"50 dezenas mais 3 Ave-Ma
 assert.equal(daily.filter(s=>s.type==="pai").length,6,"5 dezenas mais 1 Pai-Nosso inicial");
 assert.equal(new Set(daily.filter(s=>typeof s.bead==="number").map(s=>s.bead)).size,59);
 assert.equal(daily[0].type,"cruz");assert.equal(daily[1].type,"oferecimento");assert.equal(daily[2].type,"credo");
+for(const type of ["agradecimento","salve","ladainha","oremos"]) {
+  const step=daily.find(s=>s.type===type);
+  assert.equal(step.marker,"medal","O encerramento retorna à medalha: "+type);
+}
 assert.ok(daily.findIndex(s=>s.type==="salve")>daily.findIndex(s=>s.type==="misterio"));
 const chosen=generate("escolhido","gloriosos");
 assert.equal(chosen.filter(s=>s.type==="misterio").length,5);

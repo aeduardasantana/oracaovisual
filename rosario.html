@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Lora:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=20260918-6">
-  <link rel="stylesheet" href="rosario.css?v=20261012-1">
+  <link rel="stylesheet" href="rosario.css?v=20261012-2">
 </head>
 <body>
 <header class="topbar">
@@ -38,8 +38,9 @@
     </div>
     <label class="rosary-select-label" for="rosaryMode">FORMA DE ORAÇÃO
       <select id="rosaryMode">
-        <option value="terco">Santo Terço — 5 mistérios</option>
-        <option value="tradicional">Rosário tradicional completo — 15 mistérios</option>
+        <option value="dia">Terço do dia — sugestão de hoje</option>
+        <option value="escolhido">Terço escolhido — 5 mistérios</option>
+        <option value="tradicional">Rosário completo — 15 mistérios</option>
       </select>
     </label>
     <p class="rosary-day" id="mysteryOfDay" role="status">Mistérios de hoje: Gozosos</p>
@@ -51,7 +52,8 @@
         <button type="button" data-group="gloriosos" aria-pressed="false"><strong>Gloriosos</strong><small>Ressurreição e glória</small></button>
       </div>
     </div>
-    <p id="routeSummary" class="route-summary" aria-live="polite">5 mistérios · Gozosos</p>
+    <p id="routeSummary" class="route-summary" aria-live="polite">Terço do dia · 5 mistérios</p>
+    <label class="motion-toggle" for="motionEnabled"><input id="motionEnabled" type="checkbox" checked><span>Usar animações suaves durante a oração</span></label>
     <button type="button" id="startRosary" class="rosary-start">COMEÇAR A REZAR <span aria-hidden="true">→</span></button>
   </section>
 
@@ -81,6 +83,8 @@
         <p class="rosary-small-label" id="stepType">PREPARAÇÃO PARA ORAR</p>
         <h3 id="stepTitle">Comece pelo sinal da Cruz</h3>
         <p id="mysteryContext" class="mystery-context" hidden></p>
+        <div id="prayerMotion" class="prayer-motion" role="img" aria-label="Representação simbólica da oração atual"></div>
+        <p id="motionDescription" class="motion-description"></p>
         <div class="prayer-image" id="prayerImage" hidden><img id="prayerImageSrc" src="" alt=""><p id="frameCaption" class="rosary-image-caption"></p><div class="rosary-image-controls"><button id="framePrev" type="button" aria-label="Imagem anterior da oração">←</button><span id="frameCounter">1 de 10</span><button id="frameNext" type="button" aria-label="Próxima imagem da oração">→</button></div></div>
         <p class="prayer-words" id="stepWords">Em nome do Pai, do Filho e do Espírito Santo. Amém.</p>
         <p class="prayer-reference" id="stepReference"></p>
@@ -103,24 +107,24 @@
   </section>
   <section class="rosary-explanation">
     <h2>O que você está contemplando?</h2>
-    <p>Os mistérios acompanham a história de Jesus: sua vinda ao mundo, sua vida pública, sua Paixão e sua vitória sobre a morte. O desenho mostra o percurso do terço, enquanto as palavras orientam cada oração.</p>
-    <p><strong>Terço:</strong> cinco mistérios e 59 contas físicas. <strong>Rosário tradicional:</strong> quinze mistérios, com Gozosos, Dolorosos e Gloriosos e 150 Ave-Marias nas dezenas. O mapa é percorrido novamente a cada grupo. A indicação do dia segue o calendário tradicional anterior a 2002: segunda e quinta, Gozosos; terça e sexta, Dolorosos; quarta, sábado e domingo, Gloriosos.</p>
+    <p>Os mistérios acompanham a vida de Jesus e de sua Santíssima Mãe: a Encarnação, a Paixão, a Ressurreição e a glória de Cristo. O desenho mostra o percurso do terço, enquanto as palavras orientam cada oração.</p>
+    <p><strong>Terço:</strong> cinco mistérios e 59 contas físicas. <strong>Rosário tradicional:</strong> quinze mistérios, com Gozosos, Dolorosos e Gloriosos e 150 Ave-Marias nas dezenas. O mapa é percorrido novamente a cada grupo. A sugestão diária segue a distribuição tradicional associada à espiritualidade de São Luís Maria Grignion de Montfort: segunda e quinta, Gozosos; terça e sexta, Dolorosos; quarta, sábado e domingo, Gloriosos.</p>
   </section>
 </main>
 <footer>
   <strong>Oração Visual</strong>
   <p>Um recurso de apoio à oração e à compreensão visual, desenvolvido especialmente para ampliar o acesso de pessoas surdas e não alfabetizadas à experiência da oração católica. Sua construção considera o Catecismo da Igreja Católica e contribuições da comunidade surda.</p>
   <aside class="support-notice" aria-label="Aviso sobre os recursos de apoio"><strong>RECURSOS DE APOIO</strong><p>As imagens e o avatar em Libras favorecem a compreensão e a acessibilidade comunicacional. São recursos complementares e não substituem a mediação humana em Libras nem a formação e o acompanhamento catequético.</p></aside>
-  <p class="reference">Referências: CIC 971 · 966 · 2626–2643 · Rosarium Virginis Mariae</p>
+  <p class="reference">Referências: CIC 971 · 966 · 2626–2643 · São Luís Maria Grignion de Montfort, O Segredo Admirável do Santíssimo Rosário</p>
   <button class="install-app" id="installAppButton" type="button" hidden>INSTALAR APLICATIVO</button>
   <p class="footer-rights">© 2026 Eduarda Bispo. Todos os direitos reservados.</p>
-  <p class="site-version" aria-label="Versão atual">Versão 1.4</p>
+  <p class="site-version" aria-label="Versão atual">Versão 1.5</p>
   <a class="footer-brand" href="https://compassrosesystems.com.br/" target="_blank" rel="noopener noreferrer">Desenvolvido por Compass Rose Systems</a>
 </footer>
 <div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
 <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
 <script>if (window.VLibras) new window.VLibras.Widget('https://vlibras.gov.br/app');</script>
-<script src="rosario.js?v=20261012-1" defer></script>
+<script src="rosario.js?v=20261012-2" defer></script>
 <script src="pwa-install.js?v=20260918-1" defer></script>
 </body>
 </html>

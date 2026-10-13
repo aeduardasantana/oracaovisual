@@ -232,3 +232,10 @@ body.rosary-glory .rosary-experience>*{position:relative;z-index:1}
 .rosary-experience{padding-bottom:120px}
 body.rosary-nav-visible .rosary-nav{position:fixed;left:0;right:0;bottom:0;max-width:700px;padding:12px 14px max(12px,env(safe-area-inset-bottom));box-shadow:0 -6px 28px rgba(19,42,61,.12);background:#fff;border-top:1px solid #e2ddd3;z-index:45}
 @media(max-width:850px){.rosary-progress-track{display:none}}
+
+/* Ordem física do terço: crucifixo → contas introdutórias → medalha. */
+#rosaryMap .rosary-medal{cursor:pointer;transition:fill .2s,stroke .2s}
+#rosaryMap .rosary-medal.is-current{fill:#173b63;stroke:#e8c383;stroke-width:4}
+#rosaryMap .rosary-medal:focus{stroke:#173b63;stroke-width:5;outline:none}
+.rosary-mini-beads>span.medal{height:24px;width:24px;display:grid;place-items:center;border:2px solid #b88843;background:#c69545;color:#173b63;font-size:10px;font-weight:800}
+.rosary-mini-beads>span.medal.current{color:#fff;background:#173b63;box-shadow:0 0 0 5px rgba(198,149,69,.24)}

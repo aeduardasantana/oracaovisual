@@ -27,6 +27,18 @@ assert.equal(points.length,59);
 assert.equal(points.filter((p,i)=>i<55 && p.big).length,5,"Cinco contas grandes no círculo");
 assert.equal(points.filter((p,i)=>i>=55 && p.big).length,1,"Uma conta grande na haste");
 assert.ok(points.every(p=>Number.isFinite(p.x)&&Number.isFinite(p.y)));
+assert.ok(points[55].y>points[56].y && points[56].y>points[57].y && points[57].y>points[58].y,
+  "A haste progride de baixo para cima, da cruz em direção à medalha");
+assert.ok(points[55].y<741 && points[58].y>569,
+  "Contas entre a cruz e a medalha central");
+assert.ok(points[0].x<350 && points[54].x>350 && points[0].y>515 && points[54].y>515,
+  "O aro começa próximo da medalha no lado esquerdo e termina no lado direito");
+assert.ok(points[11].y<points[0].y && points[44].y<points[54].y,
+  "O aro sobe pela esquerda antes de retornar pela direita");
+assert.ok(source.includes('marker:"medal"') && source.includes('id:"rosaryMedal"'),
+  "O Glória chega à medalha central");
+assert.ok(source.includes('M350 569 L') && !source.includes('join(" ")+" Z"'),
+  "O aro liga os dois extremos à medalha em vez de fechar uma volta artificial");
 function generate(mode,group){
   const ctx=vm.createContext({});
   const body=data+"\nlet selectedMode="+JSON.stringify(mode)+";\nlet selectedGroup="+JSON.stringify(group)+";\nlet steps=[];\n"+builders+"\nbuildSteps();";

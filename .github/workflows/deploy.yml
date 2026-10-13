@@ -34,10 +34,24 @@ jobs:
           echo "Validando DNS de $DOMAIN"
           getent ahostsv4 "$DOMAIN" || { echo "::error::Subdomínio sem resolução de DNS. Verifique os registros DNS do subdomínio na hospedagem."; exit 1; }
           echo "Validando página do Rosário"
-          curl --fail --location --silent --show-error --retry 3 --retry-delay 5 --connect-timeout 15 --max-time 45 \
-            -H 'Cache-Control: no-cache' \
-            "https://$DOMAIN/rosario.html?versao=${GITHUB_SHA}" \
-            -o /tmp/oracao-visual-rosario-publicado.html
+          URL="https://$DOMAIN/rosario.html?versao=${GITHUB_SHA}"
+          if ! curl --fail --location --silent --show-error --retry 1 --connect-timeout 15 --max-time 45 \
+            -H 'Cache-Control: no-cache' "$URL" \
+            -o /tmp/oracao-visual-rosario-publicado.html; then
+            echo "::error::Falha ao acessar a página com HTTPS validado. Verifique o certificado SSL/TLS e a cadeia intermediária."
+            echo "Diagnóstico: verificando a página sem validar a cadeia SSL; não substitui a correção do HTTPS."
+            if curl --insecure --fail --location --silent --show-error --max-time 30 "$URL" \
+              -o /tmp/oracao-visual-rosario-diagnostico.html; then
+              if grep -Fq 'id="mysteryOfDay"' /tmp/oracao-visual-rosario-diagnostico.html; then
+                echo "::notice::O arquivo rosario.html ESTÁ publicado, mas o certificado HTTPS não passou na validação."
+              else
+                echo "::warning::Resposta recebida, mas não corresponde ao Rosário atualizado. Verificar raiz do subdomínio."
+              fi
+            else
+              echo "::warning::Sem acesso à página mesmo no diagnóstico TLS: verificar servidor e raiz do subdomínio."
+            fi
+            exit 1
+          fi
           grep -Fq 'id="mysteryOfDay"' /tmp/oracao-visual-rosario-publicado.html || {
             echo "::error::O domínio responde, mas rosario.html não contém a versão atual. Confira a raiz do subdomínio na Locaweb e o remoteDir.";
             exit 1;

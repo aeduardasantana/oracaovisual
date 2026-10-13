@@ -162,11 +162,12 @@ $("motionEnabled").addEventListener("change",event=>{
 
 function beadPoint(i) {
   if(i < 55) {
-    // O aro parte da medalha pela esquerda, sobe e retorna à medalha pela direita.
-    // Não é um círculo fechado: os dois extremos encontram a medalha central.
-    const start = Math.PI / 2 + 0.28;
+    // O aro parte da medalha PELA DIREITA, sobe pela direita, cruza
+    // a parte superior e desce pela esquerda de volta à medalha.
+    // Os extremos ligam-se à medalha; não é um círculo fechado.
+    const start = Math.PI / 2 - 0.28;
     const sweep = 2 * Math.PI - 0.56;
-    const angle = start + i * sweep / 54;
+    const angle = start - i * sweep / 54;
     return {x:350 + 232 * Math.cos(angle), y:316 + 225 * Math.sin(angle),big:i%11===0};
   }
   // Da cruz para a medalha: conta grande e depois 3 contas pequenas, de baixo para cima.
@@ -184,9 +185,9 @@ function svgItem(name,attrs={},parent=svg) {
 function buildMap(){
   svg.textContent="";
   svgItem("title",{},svg).textContent="Mapa do terço tradicional, com 59 contas";
-  svgItem("desc",{},svg).textContent="A oração começa no crucifixo, sobe pela conta grande do Pai-Nosso e por três Ave-Marias, chega à medalha central para o Glória e percorre as cinco dezenas do aro, saindo pela esquerda e retornando pela direita.";
+  svgItem("desc",{},svg).textContent="A oração começa no crucifixo, sobe pela conta grande do Pai-Nosso e por três Ave-Marias, chega à medalha central para o Glória; depois sobe pelo lado direito do aro, atravessa o alto e retorna pela esquerda à medalha.";
   const path = points.slice(0,55).map((p,i)=>(i===0?"M":"L")+p.x.toFixed(1)+" "+p.y.toFixed(1)).join(" ");
-  const left=points[0],right=points[54];
+  const right=points[0],left=points[54];
   svgItem("path",{d:path,class:"rosary-wire"});
   svgItem("path",{d:"M350 569 L"+left.x.toFixed(1)+" "+left.y.toFixed(1),class:"rosary-wire"});
   svgItem("path",{d:"M350 569 L"+right.x.toFixed(1)+" "+right.y.toFixed(1),class:"rosary-wire"});

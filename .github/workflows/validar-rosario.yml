@@ -1,0 +1,26 @@
+name: Validar Rosário Visual
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'rosario.*'
+      - 'ave-maria.html'
+      - 'pai-nosso.html'
+      - 'index.html'
+      - 'oracoes-ilustradas.html'
+      - 'tests/rosario.test.cjs'
+      - '.github/workflows/validar-rosario.yml'
+  workflow_dispatch:
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Conferir sintaxe e fluxo do Rosário
+        run: |
+          node --check rosario.js
+          node --test tests/rosario.test.cjs

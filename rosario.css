@@ -118,3 +118,10 @@
 @keyframes holy-page{0%,100%{transform:scaleX(1)}40%,65%{transform:scaleX(.96)}}
 @media(max-width:650px){.rosary-options .motion-toggle{grid-column:1/-1}.prayer-motion{height:162px}.prayer-motion svg{height:160px}}
 @media(prefers-reduced-motion:reduce){.prayer-motion *{animation:none!important;transition:none!important}}
+
+/* O Glória inspira um resplendor celeste, sem flashes ou efeito estroboscópico. */
+.rosary-experience{position:relative}
+body.rosary-glory .rosary-experience::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 66% 22%,rgba(244,218,151,.28),transparent 60%);pointer-events:none;z-index:0;animation:rosary-heavenly-glow 3.5s ease-in-out infinite}
+body.rosary-glory .rosary-experience>*{position:relative;z-index:1}
+@keyframes rosary-heavenly-glow{0%,100%{opacity:.36}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){body.rosary-glory .rosary-experience::before{animation:none}}

@@ -145,7 +145,8 @@ function updateMotion(step) {
   const motion=MOTION_VISUALS[kind];
   overlay.className="rosary-screen-effect effect-"+kind;
   // A cena só existe enquanto o gesto acontece. Não é um painel ilustrado.
-  overlay.innerHTML='<svg viewBox="0 0 300 185" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">'+motion.art+'</svg>';
+  // O Glória é apenas claridade celeste se espalhando pela tela, sem triângulo nem figura estática.
+  if(kind!=="gloria")overlay.innerHTML='<svg viewBox="0 0 300 185" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">'+motion.art+'</svg>';
   overlay.hidden=false;
   effectTimeout=window.setTimeout(()=>{
     overlay.hidden=true;
@@ -396,7 +397,7 @@ function render(){
   const currentGroupIndex=typeof s.position==="number"?s.position+1:1;
   const groupsTotal=selectedMode==="tradicional"?3:1;
   const stepDesc=group && m?(s.mystery+1)+"º mistério de 5 · grupo "+currentGroupIndex+" de "+groupsTotal:"Orações de abertura ou encerramento";
-  $("progressText").textContent="Etapa "+(index+1)+" de "+steps.length+" · "+stepDesc;
+  $("progressText").textContent=group && m?"Mistério "+(s.mystery+1)+" de 5"+(groupsTotal>1?" · parte "+currentGroupIndex+" de 3":""):"Abertura e encerramento";
   $("rosaryFinished").hidden=!finished;
   $("prayerPanel").hidden=finished;
   $("rosaryNav").hidden=finished;

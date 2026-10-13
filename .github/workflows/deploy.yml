@@ -21,3 +21,21 @@ jobs:
           password: ${{ secrets.PASS }}
           localDir: "./"
           remoteDir: "./public_html/oracaovisual/"
+
+      - name: Confirmar que o Rosário está disponível no domínio
+        shell: bash
+        run: |
+          set -euo pipefail
+          DOMAIN="oracaovisual.compassrosesystems.com.br"
+          echo "Validando DNS de $DOMAIN"
+          getent ahostsv4 "$DOMAIN" || { echo "::error::Subdomínio sem resolução de DNS. Verifique os registros DNS do subdomínio na hospedagem."; exit 1; }
+          echo "Validando página do Rosário"
+          curl --fail --location --silent --show-error --retry 3 --retry-delay 5 --connect-timeout 15 --max-time 45 \
+            -H 'Cache-Control: no-cache' \
+            "https://$DOMAIN/rosario.html?versao=${GITHUB_SHA}" \
+            -o /tmp/oracao-visual-rosario-publicado.html
+          grep -Fq 'id="mysteryOfDay"' /tmp/oracao-visual-rosario-publicado.html || {
+            echo "::error::O domínio responde, mas rosario.html não contém a versão atual. Confira a raiz do subdomínio na Locaweb e o remoteDir.";
+            exit 1;
+          }
+          echo "Rosário publicado e acessível."

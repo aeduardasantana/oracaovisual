@@ -162,10 +162,15 @@ $("motionEnabled").addEventListener("change",event=>{
 
 function beadPoint(i) {
   if(i < 55) {
-    const angle = -Math.PI / 2 + i * Math.PI * 2 / 55;
+    // O aro parte da medalha pela esquerda, sobe e retorna à medalha pela direita.
+    // Não é um círculo fechado: os dois extremos encontram a medalha central.
+    const start = Math.PI / 2 + 0.28;
+    const sweep = 2 * Math.PI - 0.56;
+    const angle = start + i * sweep / 54;
     return {x:350 + 232 * Math.cos(angle), y:316 + 225 * Math.sin(angle),big:i%11===0};
   }
-  const tailY = [613,650,681,712];
+  // Da cruz para a medalha: conta grande e depois 3 contas pequenas, de baixo para cima.
+  const tailY = [710,677,644,611];
   return {x:350,y:tailY[i-55],big:i===55};
 }
 points = Array.from({length:59},(_,i)=>beadPoint(i));
@@ -179,31 +184,34 @@ function svgItem(name,attrs={},parent=svg) {
 function buildMap(){
   svg.textContent="";
   svgItem("title",{},svg).textContent="Mapa do terço tradicional, com 59 contas";
-  svgItem("desc",{},svg).textContent="55 contas no círculo, sendo cinco maiores e 50 menores; quatro na haste e o crucifixo. A posição atual é destacada.";
-  const path = points.slice(0,55).map((p,i)=>(i===0?"M":"L")+p.x.toFixed(1)+" "+p.y.toFixed(1)).join(" ")+" Z";
+  svgItem("desc",{},svg).textContent="A oração começa no crucifixo, sobe pela conta grande do Pai-Nosso e por três Ave-Marias, chega à medalha central para o Glória e percorre as cinco dezenas do aro, saindo pela esquerda e retornando pela direita.";
+  const path = points.slice(0,55).map((p,i)=>(i===0?"M":"L")+p.x.toFixed(1)+" "+p.y.toFixed(1)).join(" ");
+  const left=points[0],right=points[54];
   svgItem("path",{d:path,class:"rosary-wire"});
-  svgItem("path",{d:"M350 541 L350 738",class:"rosary-wire"});
-  svgItem("ellipse",{cx:350,cy:569,rx:19,ry:22,class:"rosary-medal"});
+  svgItem("path",{d:"M350 569 L"+left.x.toFixed(1)+" "+left.y.toFixed(1),class:"rosary-wire"});
+  svgItem("path",{d:"M350 569 L"+right.x.toFixed(1)+" "+right.y.toFixed(1),class:"rosary-wire"});
+  svgItem("path",{d:"M350 569 L350 741",class:"rosary-wire"});
+  svgItem("ellipse",{cx:350,cy:569,rx:19,ry:22,class:"rosary-medal",id:"rosaryMedal",role:"button",tabindex:"0","aria-label":"Ir para o Glória ao Pai, junto à medalha central"});
   svgItem("text",{x:350,y:575,class:"rosary-mark","aria-hidden":"true"}).textContent="M";
   svgItem("path",{d:"M341 741 h18 v14 h11 v15 h-11 v35 h-18 v-35 h-11 v-15 h11 z",class:"rosary-cross",id:"rosaryCross",role:"button",tabindex:"0","aria-label":"Ir para o início do terço, sinal da Cruz"});
   points.forEach((p,i)=>{
-    svgItem("circle",{cx:p.x,cy:p.y,r:p.big?12:8,class:"rosary-bead "+(p.big?"rosary-large":"rosary-small"),"data-bead":i,role:"button",tabindex:"0","aria-label":i<55?("Ir para a conta "+(i+1)+" do círculo"):("Ir para a conta "+(i-54)+" do início")});
+    svgItem("circle",{cx:p.x,cy:p.y,r:p.big?12:8,class:"rosary-bead "+(p.big?"rosary-large":"rosary-small"),"data-bead":i,role:"button",tabindex:"0","aria-label":i<55?("Ir para a conta "+(i+1)+" do aro"):("Ir para a conta "+(i-54)+" da haste, contando a partir da cruz")});
   });
   svg.addEventListener("click",event=>{
-    const el=event.target.closest("[data-bead],#rosaryCross");
+    const el=event.target.closest("[data-bead],#rosaryCross,#rosaryMedal");
     if(!el)return;
-    const bead=el.id==="rosaryCross"?null:Number(el.getAttribute("data-bead"));
+    const bead=el.id==="rosaryCross"?null:el.id==="rosaryMedal"?"medal":Number(el.getAttribute("data-bead"));
     gotoBead(bead);
   });
   svg.addEventListener("keydown",event=>{
     if(event.key!=="Enter" && event.key!==" ")return;
-    const el=event.target.closest("[data-bead],#rosaryCross");if(!el)return;
+    const el=event.target.closest("[data-bead],#rosaryCross,#rosaryMedal");if(!el)return;
     event.preventDefault();
-    gotoBead(el.id==="rosaryCross"?null:Number(el.getAttribute("data-bead")));
+    gotoBead(el.id==="rosaryCross"?null:el.id==="rosaryMedal"?"medal":Number(el.getAttribute("data-bead")));
   });
 }
-function appendStep(type,title,{bead=null,group=null,mystery=null,position=null,caption="",optional=false,ref="",meditation="",context=""}={}) {
-  steps.push({type,title,bead,group,mystery,position,caption,optional,ref,meditation,context});
+function appendStep(type,title,{bead=null,marker=null,group=null,mystery=null,position=null,caption="",optional=false,ref="",meditation="",context=""}={}) {
+  steps.push({type,title,bead,marker,group,mystery,position,caption,optional,ref,meditation,context});
 }
 function buildSteps(){
   steps=[];
@@ -212,7 +220,7 @@ function buildSteps(){
   appendStep("credo","Creio em Deus Pai",{context:"No crucifixo, faça a profissão de fé."});
   appendStep("pai","Pai-Nosso inicial",{bead:55,context:"Na primeira conta grande da haste."});
   ["fé","esperança","caridade"].forEach((virtue,i)=>appendStep("ave","Ave-Maria inicial — "+(i+1)+"ª",{bead:56+i,context:"Ofereça esta Ave-Maria pedindo a virtude da "+virtue+"."}));
-  appendStep("gloria","Glória ao Pai",{bead:58,context:"Ao final das três Ave-Marias, louve a Santíssima Trindade."});
+  appendStep("gloria","Glória ao Pai",{marker:"medal",context:"Ao chegar à medalha central, louve a Santíssima Trindade depois das três Ave-Marias."});
   const groups=selectedMode==="tradicional"?["gozosos","dolorosos","gloriosos"]:[selectedGroup];
   groups.forEach((group,g)=>{
     ROSARY_GROUPS[group].mysteries.forEach((m,n)=>{
@@ -239,6 +247,7 @@ function gotoBead(bead){
   const position=typeof current.position==="number"?current.position:0;
   let stepIndex;
   if(bead===null)stepIndex=steps.findIndex(s=>s.type==="cruz");
+  else if(bead==="medal")stepIndex=steps.findIndex(s=>s.marker==="medal");
   else stepIndex=steps.findIndex(s=>s.bead===bead && (bead>=55 || s.position===position) && (s.type==="pai"||s.type==="ave"));
   if(stepIndex<0)return;
   index=stepIndex;finished=false;currentFrame=0;render();save();
@@ -247,6 +256,7 @@ function gotoBead(bead){
 }
 function currentPoint(){
   const s=steps[index] || {};
+  if(s.marker==="medal")return {x:350,y:569};
   if(s.bead!==null && s.bead!==undefined)return points[s.bead];
   return {x:350,y:764};
 }
@@ -286,11 +296,13 @@ function updateMap(){
     el.classList.toggle("is-current",started && bead===activeBead);
     el.classList.toggle("is-complete",visited.has(bead) && bead!==activeBead);
   });
+  const onMedal=started && step.marker==="medal";
+  svg.querySelector("#rosaryMedal").classList.toggle("is-current",onMedal);
   svg.querySelectorAll(".rosary-halo").forEach(e=>e.remove());
-  if(started && typeof activeBead==="number"){
-    const p=points[activeBead];
-    const halo=svgItem("circle",{cx:p.x,cy:p.y,r:p.big?22:17,class:"rosary-halo"});
-    svg.insertBefore(halo,svg.querySelector("[data-bead]"));
+  if(started && (typeof activeBead==="number" || onMedal)){
+    const p=onMedal?{x:350,y:569,big:true}:points[activeBead];
+    const halo=svgItem("circle",{cx:p.x,cy:p.y,r:p.big?26:17,class:"rosary-halo"});
+    svg.insertBefore(halo,svg.querySelector("#rosaryMedal"));
   }
   updateZoom();
 }

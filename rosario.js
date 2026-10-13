@@ -46,6 +46,11 @@ const ROSARY_TEXTS = {
   jaculatoria: "Ó Maria concebida sem pecado, rogai por nós que recorremos a vós.",
   agradecimento: "Infinitas graças vos damos, soberana Rainha, pelos benefícios que todos os dias recebemos de vossas mãos liberais. Dignai-vos, agora e para sempre, tomar-nos debaixo de vosso poderoso amparo e, para mais vos obrigar, vos saudamos com uma Salve-Rainha.",
   salve: "Salve, Rainha, Mãe de misericórdia, vida, doçura e esperança nossa, salve! A vós bradamos, os degredados filhos de Eva; a vós suspiramos, gemendo e chorando neste vale de lágrimas. Eia, pois, advogada nossa, esses vossos olhos misericordiosos a nós volvei; e, depois deste desterro, mostrai-nos Jesus, bendito fruto do vosso ventre. Ó clemente, ó piedosa, ó doce sempre Virgem Maria.\n\nRogai por nós, Santa Mãe de Deus.\nPara que sejamos dignos das promessas de Cristo.",
+  ladainha: [
+    "Senhor, tende piedade de nós.\nCristo, tende piedade de nós.\nSenhor, tende piedade de nós.\nCristo, ouvi-nos.\nCristo, atendei-nos.\nDeus Pai do Céu, tende piedade de nós.\nDeus Filho, Redentor do mundo, tende piedade de nós.\nDeus Espírito Santo, tende piedade de nós.\nSantíssima Trindade, que sois um só Deus, tende piedade de nós.",
+    ["Santa Maria","Santa Mãe de Deus","Santa Virgem das Virgens","Mãe de Cristo","Mãe da Igreja","Mãe da divina graça","Mãe puríssima","Mãe castíssima","Mãe sempre virgem","Mãe imaculada","Mãe amável","Mãe admirável","Mãe do bom conselho","Mãe do Criador","Mãe do Salvador","Virgem prudentíssima","Virgem venerável","Virgem louvável","Virgem poderosa","Virgem clemente","Virgem fiel","Espelho de justiça","Sede da sabedoria","Causa da nossa alegria","Vaso espiritual","Vaso honorífico","Vaso insigne de devoção","Rosa mística","Torre de Davi","Torre de marfim","Casa de ouro","Arca da aliança","Porta do céu","Estrela da manhã","Saúde dos enfermos","Refúgio dos pecadores","Consoladora dos aflitos","Auxílio dos cristãos","Rainha dos Anjos","Rainha dos Patriarcas","Rainha dos Profetas","Rainha dos Apóstolos","Rainha dos Mártires","Rainha dos Confessores","Rainha das Virgens","Rainha de todos os Santos","Rainha concebida sem pecado original","Rainha assunta ao Céu","Rainha do sacratíssimo Rosário","Rainha da paz"].map(name=>name+", rogai por nós.").join("\n"),
+    "Cordeiro de Deus, que tirais os pecados do mundo, perdoai-nos, Senhor.\nCordeiro de Deus, que tirais os pecados do mundo, ouvi-nos, Senhor.\nCordeiro de Deus, que tirais os pecados do mundo, tende piedade de nós.\n\nRogai por nós, Santa Mãe de Deus.\nPara que sejamos dignos das promessas de Cristo."
+  ].join("\n\n"),
   oremos: "Oremos. Ó Deus, cujo Filho Unigênito, pela sua vida, morte e Ressurreição, nos alcançou as recompensas da salvação eterna, concedei-nos, nós Vos suplicamos, que, meditando os mistérios do Santíssimo Rosário da Bem-aventurada Virgem Maria, imitemos o que eles contêm e alcancemos o que prometem. Pelo mesmo Cristo, Senhor nosso. Amém."
 };
 const IMAGE_CAPTIONS = {
@@ -121,7 +126,7 @@ function appendStep(type,title,{bead=null,group=null,mystery=null,position=null,
 function buildSteps(){
   steps=[];
   appendStep("cruz","Sinal da Cruz",{context:"Comece a oração com o sinal da Cruz."});
-  appendStep("oferecimento","Oferecimento do Terço",{context:"Apresente a Deus as intenções por você, pela Igreja, pela paz, pela conversão e por quem mais necessita de oração."});
+  appendStep("oferecimento","Oferecimento do Terço",{context:"Apresente a Deus suas intenções, as do Santo Padre, da Santa Igreja, pela paz, pela conversão, reparação, salvação das almas e por quem mais necessita de oração."});
   appendStep("credo","Creio em Deus Pai",{context:"No crucifixo, faça a profissão de fé."});
   appendStep("pai","Pai-Nosso inicial",{bead:55,context:"Na primeira conta grande da haste."});
   ["fé","esperança","caridade"].forEach((virtue,i)=>appendStep("ave","Ave-Maria inicial — "+(i+1)+"ª",{bead:56+i,context:"Ofereça esta Ave-Maria pedindo a virtude da "+virtue+"."}));
@@ -142,6 +147,7 @@ function buildSteps(){
   });
   appendStep("agradecimento","Agradecimento a Nossa Senhora");
   appendStep("salve","Salve-Rainha");
+  appendStep("ladainha","Ladainha de Nossa Senhora",{optional:true,context:"Oração mariana tradicional de invocações. Você pode rezá-la aqui ou passar diretamente à oração final."});
   appendStep("oremos","Oração final do Rosário");
   appendStep("cruz","Sinal da Cruz — encerramento");
 }
@@ -232,7 +238,7 @@ function render(){
   const group=s.group?ROSARY_GROUPS[s.group].label:null;
   $("currentGroup").textContent=group?"Mistérios "+group:(selectedMode==="tradicional"?"Rosário tradicional":"Santo Terço");
   $("stepTitle").textContent=s.title;
-  $("stepType").textContent=s.type==="misterio"?"MEDITAÇÃO DO MISTÉRIO":s.type==="oferecimento"?"INTENÇÕES E OFERECIMENTO":s.type==="salve"?"ORAÇÃO A NOSSA SENHORA":s.type==="cruz"?"SINAL DA CRUZ":s.type==="agradecimento"?"AGRADECIMENTO":s.type==="oremos"?"ORAÇÃO FINAL":s.type==="credo"?"PROFISSÃO DE FÉ":s.type==="fatima"||s.type==="jaculatoria"?"JACULATÓRIA":s.type==="gloria"?"LOUVOR À SANTÍSSIMA TRINDADE":"ORAÇÃO DA CONTA ATUAL";
+  $("stepType").textContent=s.type==="misterio"?"MEDITAÇÃO DO MISTÉRIO":s.type==="oferecimento"?"INTENÇÕES E OFERECIMENTO":s.type==="salve"?"ORAÇÃO A NOSSA SENHORA":s.type==="cruz"?"SINAL DA CRUZ":s.type==="agradecimento"?"AGRADECIMENTO":s.type==="oremos"?"ORAÇÃO FINAL":s.type==="ladainha"?"LADAINHA DE NOSSA SENHORA":s.type==="credo"?"PROFISSÃO DE FÉ":s.type==="fatima"||s.type==="jaculatoria"?"JACULATÓRIA":s.type==="gloria"?"LOUVOR À SANTÍSSIMA TRINDADE":"ORAÇÃO DA CONTA ATUAL";
   $("mysteryContext").hidden=!(s.type==="misterio"||s.context);
   $("mysteryContext").textContent=s.type==="misterio"?"Para contemplar: "+s.context:s.context||"";
   $("stepWords").textContent=s.type==="misterio"?(s.meditation+"\n\nPausa para contemplar antes de começar esta dezena."):ROSARY_TEXTS[s.type]||"";

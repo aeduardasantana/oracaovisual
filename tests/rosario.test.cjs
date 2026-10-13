@@ -33,13 +33,21 @@ function generate(mode,group){
   vm.runInContext(body,ctx);
   return vm.runInContext("steps",ctx);
 }
-const daily=generate("terco","dolorosos");
+const daily=generate("dia","dolorosos");
 assert.equal(daily.filter(s=>s.type==="misterio").length,5);
 assert.equal(daily.filter(s=>s.type==="ave").length,53,"50 dezenas mais 3 Ave-Marias iniciais");
 assert.equal(daily.filter(s=>s.type==="pai").length,6,"5 dezenas mais 1 Pai-Nosso inicial");
 assert.equal(new Set(daily.filter(s=>typeof s.bead==="number").map(s=>s.bead)).size,59);
 assert.equal(daily[0].type,"cruz");assert.equal(daily[1].type,"oferecimento");assert.equal(daily[2].type,"credo");
 assert.ok(daily.findIndex(s=>s.type==="salve")>daily.findIndex(s=>s.type==="misterio"));
+const chosen=generate("escolhido","gloriosos");
+assert.equal(chosen.filter(s=>s.type==="misterio").length,5);
+assert.equal(chosen.filter(s=>s.group==="gloriosos" && s.type==="misterio").length,5);
+assert.ok(source.includes('selectedMode = "dia"'));
+assert.ok(source.includes('MOTION_VISUALS'));
+for(const scene of ["cruz","credo","gloria","pai","ave","fatima","misterio","salve"]){
+  assert.ok(source.includes('  '+scene+': {')||source.includes('  '+scene+':{'),"Animação ausente: "+scene);
+}
 const complete=generate("tradicional","gozosos");
 assert.equal(complete.filter(s=>s.type==="misterio").length,15);
 assert.equal(complete.filter(s=>s.type==="ave").length,153,"150 das dezenas mais 3 introdutórias");
@@ -47,6 +55,11 @@ assert.equal(complete.filter(s=>s.type==="pai").length,16);
 assert.equal(complete.filter(s=>s.type==="ladainha").length,1);
 const rose=read("rosario.html");
 assert.ok(rose.includes("id=\"mysteryOfDay\""));
+assert.ok(rose.includes('value="dia"'));
+assert.ok(rose.includes('value="escolhido"'));
+assert.ok(rose.includes('value="tradicional"'));
+assert.ok(rose.includes('id="prayerMotion"'));
+assert.ok(rose.includes('id="motionEnabled"'));
 assert.ok(rose.includes("rosario.js?v="));
 assert.ok(!rose.toLowerCase().includes("luminosos"),"Nenhum luminoso na página");
 assert.ok(read("index.html").includes('href="rosario.html"'));

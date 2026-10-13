@@ -236,10 +236,11 @@ function buildSteps(){
       appendStep("jaculatoria","Jaculatória: Ó Maria concebida sem pecado",{bead:beadBase+10,group,mystery:n,position:g,optional:true});
     });
   });
-  appendStep("agradecimento","Agradecimento a Nossa Senhora");
-  appendStep("salve","Salve-Rainha");
-  appendStep("ladainha","Ladainha de Nossa Senhora",{optional:true,context:"Oração mariana tradicional de invocações. Você pode rezá-la aqui ou passar diretamente à oração final."});
-  appendStep("oremos","Oração final do Rosário");
+  // Ao fim da última dezena, o percurso retorna à medalha central.
+  appendStep("agradecimento","Agradecimento a Nossa Senhora",{marker:"medal"});
+  appendStep("salve","Salve-Rainha",{marker:"medal"});
+  appendStep("ladainha","Ladainha de Nossa Senhora",{marker:"medal",optional:true,context:"Oração mariana tradicional de invocações. Você pode rezá-la aqui ou passar diretamente à oração final."});
+  appendStep("oremos","Oração final do Rosário",{marker:"medal"});
   appendStep("cruz","Sinal da Cruz — encerramento");
 }
 function gotoBead(bead){
@@ -326,7 +327,7 @@ function renderMiniBeads(){
   } else if(step.marker==="medal" || (step.bead!==null && step.bead>=55)){
     const isMedal=step.marker==="medal";
     const n=isMedal?4:step.bead-55;
-    label.textContent=isMedal?"MEDALHA CENTRAL · GLÓRIA AO PAI":step.type==="pai"?"DA CRUZ PARA CIMA · PAI-NOSSO":"DA CRUZ PARA CIMA · AVE-MARIA "+n+" DE 3";
+    label.textContent=isMedal?(step.type==="gloria"?"MEDALHA CENTRAL · GLÓRIA AO PAI":"RETORNO À MEDALHA · ORAÇÕES FINAIS"):step.type==="pai"?"DA CRUZ PARA CIMA · PAI-NOSSO":"DA CRUZ PARA CIMA · AVE-MARIA "+n+" DE 3";
     make("cross","✝");
     for(let k=0;k<4;k++)make((k===0?"large ":"")+(k<n?"done ":k===n?"current ":""));
     make("medal "+(isMedal?"current":""),"M");

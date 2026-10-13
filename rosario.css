@@ -72,3 +72,12 @@
 @media(max-width:850px){.rosary-layout{grid-template-columns:1fr}.rosary-map-panel{max-width:630px;width:100%;margin:0 auto}.rosary-prayer-panel{min-height:350px}.rosary-hero{padding-top:35px}}
 @media(max-width:650px){.rosary-page{padding:24px 15px 55px}.rosary-hero{gap:12px}.rosary-hero h1{font-size:34px}.rosary-symbol{height:80px;width:80px;flex-basis:80px}.rosary-symbol span:first-child{font-size:37px}.rosary-symbol span:last-child{font-size:8px}.rosary-hero p:not(.eyebrow){font-size:13px}.rosary-options{grid-template-columns:1fr;padding:20px 16px;margin:20px 0 31px}.rosary-picker{grid-column:1}.mystery-choices{grid-template-columns:1fr 1fr}.mystery-choices button{min-height:69px;padding:11px}.mystery-choices button strong{font-size:13px}.rosary-start{justify-self:stretch}.rosary-experience-header{align-items:start}.rosary-progress-text{font-size:10px;max-width:115px}.rosary-map-panel{padding:10px}.rosary-map-top>strong{font-size:9px}.map-zoom button{font-size:9px;padding:6px 7px}.rosary-prayer-panel{padding:24px 20px}.prayer-words{font-size:16px}.rosary-symbol span:last-child{letter-spacing:0}}
 @media(prefers-reduced-motion:reduce){.rosary-progress-track span,#rosaryMap .rosary-bead{transition:none}}
+
+.rosary-day{grid-column:1/-1;margin:0;padding:13px 15px;border-left:3px solid var(--gold);background:#fff;color:var(--blue);font-size:12px;font-weight:700;letter-spacing:.07em}
+.prayer-image{width:min(100%,340px);background:#fff;align-self:center;margin:10px auto 19px}
+.prayer-image img{width:100%;height:auto;aspect-ratio:1;object-fit:cover}
+.rosary-image-caption{text-align:center;padding:11px 12px;color:var(--blue);font-size:13px;line-height:1.45;min-height:50px;margin:0}
+.rosary-image-controls{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #e5e2dc;background:#f9f6ee;padding:8px 14px;font-size:12px;color:var(--blue);font-weight:700}
+.rosary-image-controls button{cursor:pointer;border:1px solid #c7c2ba;background:#fff;border-radius:5px;min-width:40px;min-height:38px;color:var(--blue);font-size:17px}
+.rosary-image-controls button:disabled{opacity:.35;cursor:not-allowed}
+@media(max-width:650px){.rosary-day{grid-column:1}.mystery-choices{grid-template-columns:repeat(3,1fr)}.mystery-choices button{min-width:0}.mystery-choices button strong{font-size:12px}}
